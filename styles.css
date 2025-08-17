@@ -1,77 +1,166 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ===== Brand + timings ===== */
+:root{
+  --white:#ffffff; --offwhite:#fff8e6; --yellow:#fdb913; --orange:#f36f21; --red:#ed1c24; --purple:#9e005d;
+
+  /* animation timings */
+  --wash-duration:2s;   /* layer rise */
+  --warm-shift:.8s;     /* layer B fade-in */
+  --final-fade:1.2s;    /* layer C fade-in */
+  --text-delay:2s;      /* content/typing start */
+  --overlay-fade:2s;    /* white overlay fades */
+
+  /* layout + sizing we’ve locked in */
+  --title-size: clamp(19px, 1.9vw, 32px);
+  --name-columns-width: 11ch;     /* prevents jiggle while typing */
+  --col-gap: clamp(14px, 2vw, 24px);
+  --logo-crop: inset(0 0 0 0);    /* crop transparent padding if needed */
+  --logo-h: 240px;                /* set at runtime by JS to actual logo height */
 }
 
-/* Animated gradient background */
-body {
-  font-family: 'Roboto Mono', monospace;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background: linear-gradient(-45deg, #e52d27, #b31217, #d4145a, #fbb03b);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: #111;
+/* ===== Reset & Base ===== */
+*{ box-sizing:border-box; margin:0 }
+html, body{ height:100% }
+body{
+  background: var(--offwhite);
+  color:#111;
+  font:16px/1.5 'Roboto Mono', monospace;
+  overflow:hidden; position:relative;
+
+  /* center horizontally, sit higher vertically */
+  display:flex; justify-content:center; align-items:flex-start;
 }
 
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* ===== Animated Gradient Layers ===== */
+.layer-a, .layer-b, .layer-c{
+  position: fixed; inset: auto 0 0 0;
+  height: 0%;
+  pointer-events: none;
+  z-index: -1;
+}
+/* A: offwhite → yellow → orange */
+.layer-a{
+  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 50%, var(--orange) 100%);
+  animation: rise var(--wash-duration) ease-out forwards;
+}
+/* B: warm shift to red */
+.layer-b{
+  background: linear-gradient(to bottom, var(--yellow) 0%, var(--orange) 50%, var(--red) 100%);
+  opacity: 0;
+  animation:
+    fillUp var(--wash-duration) ease-out forwards,
+    fadeIn var(--warm-shift) ease-in forwards var(--wash-duration);
+}
+/* C: final gradient with purple lower */
+.layer-c{
+  background: linear-gradient(to bottom, var(--red) 0%, var(--red) 15%, var(--purple) 100%);
+  opacity: 0;
+  animation:
+    fillUp var(--wash-duration) ease-out forwards,
+    fadeIn var(--final-fade) ease-in forwards calc(var(--wash-duration) + var(--warm-shift));
 }
 
-/* Container for logo + text */
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 60px;
+/* Soften initial wipe */
+.overlay-white{
+  position: fixed; inset: 0;
+  background: var(--white);
+  animation: overlayFade var(--overlay-fade) ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
 }
 
-/* Logo image */
-.logo {
-  width: 150px;   /* adjust size as needed */
-  height: auto;
-  margin-right: 30px;
+/* ===== Content layout ===== */
+.page{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:12vh 24px 10vh; /* controls vertical position */
 }
 
-/* Text + button */
-.company-name {
-  text-align: left;
+.brand-row{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--col-gap);
+  justify-content:center; /* keeps logo+text centered horizontally */
 }
 
-.company-name h1 {
-  font-size: 2.8rem;
-  line-height: 1.3;
-  font-weight: bold;
+/* Left: logo sized by measured height */
+.logo{
+  height: var(--logo-h);
+  width:auto;
+  display:block;
+  clip-path: var(--logo-crop);
 }
 
-/* Get quote button */
-.quote-btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 12px 28px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #111;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Right: text block height matches logo height; grid ensures top/bottom alignment */
+.name-block{
+  width:var(--name-columns-width);
+  height:var(--logo-h);
+  display:grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap:0;
+  font-size:var(--title-size);
+  text-transform:uppercase;
+  letter-spacing:.02em;
+}
+.name-line{
+  margin:0;
+  display:flex; align-items:center; /* vertical centering each row */
+  line-height:1;
+  white-space:nowrap;
 }
 
-.quote-btn:hover {
-  background-color: #333;
-  transform: translateY(-2px);
+/* CTA centered under the whole block */
+.cta{
+  margin-top:60px;
+  display:flex;
+  justify-content:center;
+}
+.btn{
+  display:inline-block;
+  padding:18px 36px;
+  font-size:18px;
+  border-radius:8px;
+  background:#111; color:#fff;
+  text-decoration:none; font-weight:700;
+  border:2px solid #111;
+  transition:transform .1s ease, box-shadow .1s ease, background .2s ease, color .2s ease;
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); box-shadow:0 3px 12px rgba(0,0,0,.18); }
+.btn:focus-visible{ outline:none; box-shadow:0 0 0 4px rgba(17,17,17,.2); }
+
+/* Revision label */
+.revision{
+  position: fixed; left:14px; bottom:10px;
+  font-size:14px; color:#000; opacity:.85;
+  z-index: 10000;
+}
+
+/* Keyframes */
+@keyframes rise   { from{height:0%} to{height:100%} }
+@keyframes fillUp { from{height:0%} to{height:100%} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes overlayFade { from{opacity:1} to{opacity:0} }
+@keyframes blink  { 50% { border-color: transparent; } }
+
+/* Typing cursor */
+.cursor{
+  display:inline-block;
+  width:.6ch;
+  border-right:.15em solid #111;
+  animation: blink .8s step-end infinite;
+  vertical-align:baseline;
+}
+
+/* Stack nicely on small screens */
+@media (max-width:560px){
+  .brand-row{ flex-direction:column; align-items:flex-start }
+}
+
+/* Reduced motion: show final state immediately */
+@media (prefers-reduced-motion: reduce){
+  .layer-a, .layer-b, .layer-c{ height:100%; animation:none }
+  .layer-a{ opacity:0 } .layer-b{ opacity:0 } .layer-c{ opacity:1 }
+  .overlay-white{ animation:none; opacity:0 }
 }
