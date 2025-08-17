@@ -44,7 +44,7 @@ body{
 }
 /* B: warm shift to red */
 .layer-b{
-  background: linear-gradient(to bottom, var(--yellow) 0%, var(--orange) 50%, var(--red) 100%);
+  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 10%, var(--orange) 50%, var(--red) 100%);
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
