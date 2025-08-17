@@ -74,7 +74,48 @@ body {
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 @keyframes textIn { to{opacity:1} }
 
-/* Respect reduced motion */
+/* Site UI */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 14px 24px;
+}
+.logo { height: 44px; width: auto; }
+nav a { margin-left: 16px; text-decoration: none; color: #111; font-weight: 600; }
+nav a:hover { text-decoration: underline; }
+
+.hero {
+  padding: 12vh 24px 8vh;
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: left;
+}
+.hero h1 { font-size: clamp(28px, 5vw, 56px); line-height: 1.1; margin: 0 0 12px; }
+.hero p { font-size: clamp(16px, 2.3vw, 22px); margin: 0 0 24px; }
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+}
+
+.stack { max-width: 950px; margin: 0 auto; padding: 48px 24px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; padding: 0; margin: 12px 0 0; list-style: none; }
+.cards li {
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  padding: 16px;
+  backdrop-filter: blur(6px);
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   .layer-a, .layer-b, .layer-c{ height:100%; animation:none }
   .layer-a{ opacity:0 }
