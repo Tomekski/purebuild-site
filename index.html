@@ -1,24 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purebuild Consulting Limited</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Google font -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Purebuild Consulting</title>
+  <!-- Roboto Mono -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="logo-container">
-    <img src="Logo.png" alt="Purebuild Consulting logo" class="logo">
-    <div class="company-name">
-      <h1>
-        PUREBUILD <br>
-        CONSULTING <br>
-        LIMITED
-      </h1>
-      <button class="quote-btn">Get quote</button>
+  <!-- Gradient animation layers -->
+  <div class="layer-a"></div>
+  <div class="layer-b"></div>
+  <div class="layer-c"></div>
+  <div class="overlay-white"></div>
+
+  <main class="page">
+    <!-- Row: logo (left) + three-line typed name (right) -->
+    <section class="brand-row">
+      <img class="logo" id="logo" src="Logo.png" alt="Purebuild Consulting logo">
+
+      <div class="name-block" id="nameBlock" aria-label="Company name typed in three lines">
+        <h1 class="name-line" id="l1"></h1>
+        <h1 class="name-line" id="l2"></h1>
+        <h1 class="name-line" id="l3"></h1>
+      </div>
+    </section>
+
+    <!-- CTA centered across page and a bit lower -->
+    <div class="cta">
+      <a href="#contact" class="btn">Get quote</a>
     </div>
-  </div>
+  </main>
+
+  <div class="revision">Rev 1</div>
+
+  <script>
+    // Utilities
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+    // Jitter-free typewriter (no trailing cursor)
+    async function typeInto(el, text, speed = 45){
+      el.textContent = '';
+      const cur = document.createElement('span');
+      cur.className = 'cursor';
+      el.appendChild(cur);
+      for (const ch of text){
+        cur.before(ch);
+        await sleep(speed);
+      }
+      cur.remove();
+    }
+
+    // Measure the actual rendered logo height and sync the text block to it
+    function setLogoHeightVar(){
+      const logo = document.getElementById('logo');
+      const h = Math.round(logo.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--logo-h', h + 'px');
+    }
+
+    async function init(){
+      const logo = document.getElementById('logo');
+      if (logo.complete) setLogoHeightVar(); else logo.addEventListener('load', setLogoHeightVar);
+      window.addEventListener('resize', setLogoHeightVar);
+
+      // Start typing after the background wipe finishes
+      await sleep(2000);
+      await typeInto(document.getElementById('l1'), 'PUREBUILD', 55);
+      await sleep(110);
+      await typeInto(document.getElementById('l2'), 'CONSULTING', 55);
+      await sleep(110);
+      await typeInto(document.getElementById('l3'), 'LIMITED', 55);
+    }
+
+    init();
+  </script>
 </body>
 </html>
