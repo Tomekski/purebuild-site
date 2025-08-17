@@ -1,44 +1,41 @@
-/* --- Brand gradient (white -> yellow -> orange -> red -> purple) --- */
+/* --- Brand gradient (off-white -> yellow -> orange -> red -> purple) --- */
 :root{
-  --white:  #ffffff;
-  --yellow: #fdb913;
-  --orange: #f36f21;
-  --red:    #ed1c24;
-  --purple: #9e005d;
+  --white:    #ffffff;   /* overlay pure white */
+  --offwhite: #fff8e6;   /* subtle warm base background */
+  --yellow:   #fdb913;
+  --orange:   #f36f21;
+  --red:      #ed1c24;
+  --purple:   #9e005d;
 
-  /* timings you can tweak */
-  --wash-duration: 2s;     /* step 1→3: reveal from bottom */
-  --warm-shift:    0.8s;   /* step 3→4: orange→red bottom */
-  --final-fade:    1.2s;   /* step 4→5: fade to final red→purple */
-  --text-delay:    2s;     /* text appears after 2s */
+  --wash-duration: 2s;   /* bottom reveal (layer A) */
+  --warm-shift:    0.8s; /* orange -> red bottom (layer B) */
+  --final-fade:    1.2s; /* fade to final red->purple (layer C) */
+  --text-delay:    2s;   /* show content after 2s */
+  --overlay-fade:  2s;   /* white overlay fade-out */
 }
 
 /* Reset & layout */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 body {
-  background: var(--white);  /* Step 1: all white */
+  background: var(--offwhite);
   color:#111;
   font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   overflow: hidden;
   position: relative;
 }
 
-/* LAYER A: initial gradient (white→yellow→orange), rises from bottom */
-.layer-a,
-.layer-b,
-.layer-c{
+/* Gradient layers */
+.layer-a, .layer-b, .layer-c{
   position: fixed; inset: auto 0 0 0;
-  height: 0%;               /* start hidden at bottom */
+  height: 0%;
   pointer-events: none;
   z-index: -1;
 }
 .layer-a{
-  background: linear-gradient(to bottom, var(--white) 0%, var(--yellow) 50%, var(--orange) 100%);
+  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 50%, var(--orange) 100%);
   animation: rise var(--wash-duration) ease-out forwards;
 }
-
-/* LAYER B: warm shift (yellow→orange→red) once the page is filled */
 .layer-b{
   background: linear-gradient(to bottom, var(--yellow) 0%, var(--orange) 50%, var(--red) 100%);
   opacity: 0;
@@ -46,35 +43,59 @@ body {
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--warm-shift) ease-in forwards var(--wash-duration);
 }
-
-/* LAYER C: final state (red top → purple bottom), fades over B */
 .layer-c{
-  background: linear-gradient(to bottom, var(--red) 0%, var(--purple) 100%);
+  /* ✅ Adjusted final gradient: purple starts lower (~25%) */
+  background: linear-gradient(
+    to bottom,
+    var(--red) 0%,
+    var(--red) 25%,
+    var(--purple) 100%
+  );
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--final-fade) ease-in forwards calc(var(--wash-duration) + var(--warm-shift));
 }
 
+/* White overlay */
+.overlay-white{
+  position: fixed; inset: 0;
+  background: var(--white);
+  animation: overlayFade var(--overlay-fade) ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+@keyframes overlayFade { from { opacity: 1; } to { opacity: 0; } }
+
 /* Content */
 .page{
   position: relative;
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
   padding: 14vh 24px 10vh;
   opacity: 0;
   animation: textIn .8s ease forwards var(--text-delay);
 }
 .page h1{ font-size: clamp(28px, 5vw, 56px); line-height: 1.1; margin: 0 0 12px; }
-.page p{ font-size: clamp(16px, 2.2vw, 22px); margin: 0 0 16px; }
+.page p{ font-size: clamp(16px, 2.3vw, 22px); margin: 0 0 24px; }
+.btn{
+  display:inline-block; padding:12px 18px; border-radius:999px;
+  background:#111; color:#fff; text-decoration:none; font-weight:700;
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
 
-/* Keyframes */
-@keyframes rise   { from{height:0%} to{height:100%} }
-@keyframes fillUp { from{height:0%} to{height:100%} }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-@keyframes textIn { to{opacity:1} }
+/* Section layout */
+.stack { max-width: 950px; margin: 0 auto; padding: 48px 24px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; padding: 0; margin: 12px 0 0; list-style: none; }
+.cards li {
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  padding: 16px;
+  backdrop-filter: blur(6px);
+}
 
-/* Site UI */
+/* Site header */
 .site-header {
   display: flex;
   align-items: center;
@@ -86,6 +107,7 @@ body {
 nav a { margin-left: 16px; text-decoration: none; color: #111; font-weight: 600; }
 nav a:hover { text-decoration: underline; }
 
+/* Hero section */
 .hero {
   padding: 12vh 24px 8vh;
   max-width: 950px;
@@ -94,26 +116,12 @@ nav a:hover { text-decoration: underline; }
 }
 .hero h1 { font-size: clamp(28px, 5vw, 56px); line-height: 1.1; margin: 0 0 12px; }
 .hero p { font-size: clamp(16px, 2.3vw, 22px); margin: 0 0 24px; }
-.btn {
-  display: inline-block;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: #111;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(0,0,0,.15);
-}
 
-.stack { max-width: 950px; margin: 0 auto; padding: 48px 24px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; padding: 0; margin: 12px 0 0; list-style: none; }
-.cards li {
-  background: rgba(255,255,255,.75);
-  border: 1px solid rgba(0,0,0,.06);
-  border-radius: 14px;
-  padding: 16px;
-  backdrop-filter: blur(6px);
-}
+/* Animations */
+@keyframes rise   { from{height:0%} to{height:100%} }
+@keyframes fillUp { from{height:0%} to{height:100%} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes textIn { to{opacity:1} }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
@@ -121,5 +129,6 @@ nav a:hover { text-decoration: underline; }
   .layer-a{ opacity:0 }
   .layer-b{ opacity:0 }
   .layer-c{ opacity:1 }
+  .overlay-white{ animation:none; opacity:0; }
   .page{ opacity:1; animation:none }
 }
