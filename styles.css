@@ -55,7 +55,7 @@ body{
   background: linear-gradient(
     to bottom,
     var(--red) 0%,
-    var(--red) 25%,
+    var(--red) 15%,
     var(--purple) 100%
   );
   opacity: 0;
