@@ -10,20 +10,16 @@
 /* Reset & layout */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+
 body {
   margin: 0;
   color: #111;
   font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  /* Animated wash once on load */
-  background: linear-gradient(to bottom,
-    var(--c0) 0%,
-    var(--c1) 25%,
-    var(--c2) 45%,
-    var(--c3) 70%,
-    var(--c4) 100%);
-  background-size: 100% 300%;
-  background-position: top;
+  /* Start all white, then wash gradient in from bottom to final red->purple */
+  background: linear-gradient(to bottom, var(--c0) 0%, var(--c0) 100%);
+  background-size: 100% 100%;
+  background-position: bottom;
   animation: gradientWash 6s ease-out forwards; /* runs once, freezes at end */
 }
 
@@ -31,21 +27,44 @@ body {
 @media (prefers-reduced-motion: reduce){
   body {
     animation: none;
+    background: linear-gradient(to bottom, var(--c3) 0%, var(--c4) 100%);
     background-size: 100% 100%;
     background-position: bottom;
   }
 }
 
-/* Optional: fade in content after the wash finishes */
+/* Content fades in sooner (after 2s) */
 .page {
   opacity: 0;
-  animation: contentIn 0.8s ease 6s forwards; /* delay matches gradient duration */
+  animation: contentIn 0.8s ease 2s forwards; /* show after 2s */
 }
 
+/* Wash from white -> full multi-stop gradient -> final red->purple */
 @keyframes gradientWash {
-  from { background-position: top; }
-  to   { background-position: bottom; }
+  0% {
+    background: linear-gradient(to bottom, var(--c0) 0%, var(--c0) 100%);
+    background-size: 100% 100%;
+    background-position: bottom;
+  }
+  30% {
+    /* Introduce the full multi-stop gradient and start "pushing" it up */
+    background: linear-gradient(to bottom,
+      var(--c0) 0%,
+      var(--c1) 25%,
+      var(--c2) 45%,
+      var(--c3) 70%,
+      var(--c4) 100%);
+    background-size: 100% 300%;
+    background-position: top;
+  }
+  100% {
+    /* Final state you liked: red top -> purple bottom */
+    background: linear-gradient(to bottom, var(--c3) 0%, var(--c4) 100%);
+    background-size: 100% 100%;
+    background-position: bottom;
+  }
 }
+
 @keyframes contentIn { to { opacity: 1; } }
 
 /* Simple, clean UI */
