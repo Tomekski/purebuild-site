@@ -3,28 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Purebuild Consulting</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Purebuild Consulting — Residential Structural Engineering</title>
+  <meta name="description" content="Purebuild Consulting — residential structural engineering, done clearly." />
+
+  <!-- Cache-bust while iterating: bump the rev number when you change styles.css -->
+  <link rel="stylesheet" href="styles.css?v=rev6" />
 </head>
 <body>
-  <!-- Gradient animation layers -->
-  <div class="layer-a"></div>
-  <div class="layer-b"></div>
-  <div class="layer-c"></div>
 
-  <!-- White fade overlay (softens the initial wipe) -->
-  <div class="overlay-white"></div>
+  <!-- Gradient layers -->
+  <div class="layer-a" aria-hidden="true"></div>
+  <div class="layer-b" aria-hidden="true"></div>
+  <div class="layer-c" aria-hidden="true"></div>
+
+  <!-- Soft white overlay to hide the wipe seam -->
+  <div class="overlay-white" aria-hidden="true"></div>
 
   <!-- Content -->
   <main class="page">
-    <section class="hero">
+    <section class="hero" role="banner">
       <h1>Purebuild Consulting</h1>
       <p>Residential structural engineering, done clearly.</p>
-      <a href="#contact" class="btn">Get a quote</a>
+      <!-- Replace href with your contact link or quote form -->
+      <a class="btn" href="#quote" aria-label="Get a quote">Get a quote</a>
     </section>
   </main>
 
-  <!-- Revision label -->
+  <!-- Always-visible tiny revision label (bottom-left) -->
   <div class="revision">Rev 1</div>
+
+  <!-- No JS required. Keep this file minimal for GitHub Pages. -->
 </body>
 </html>
