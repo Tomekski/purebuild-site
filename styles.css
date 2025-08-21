@@ -1,65 +1,71 @@
-/* ===== Brand + timings ===== */
+/* --- Brand colours --- */
 :root{
-  --white:#ffffff; --offwhite:#fff8e6; --yellow:#fdb913; --orange:#f36f21; --red:#ed1c24; --purple:#9e005d;
+  --white:    #ffffff;   /* overlay pure white */
+  --offwhite: #fff8e6;   /* subtle warm base */
+  --yellow:   #fdb913;
+  --orange:   #f36f21;
+  --red:      #ed1c24;
+  --purple:   #9e005d;
 
-  /* animation timings */
-  --wash-duration:2s;   /* layer rise */
-  --warm-shift:.8s;     /* layer B fade-in */
-  --final-fade:1.2s;    /* layer C fade-in */
-  --text-delay:2s;      /* content/typing start */
-  --overlay-fade:2s;    /* white overlay fades */
-
-  /* layout + sizing we’ve locked in */
-  --title-size: clamp(19px, 1.9vw, 32px);
-  --name-columns-width: 11ch;     /* prevents jiggle while typing */
-  --col-gap: clamp(14px, 2vw, 24px);
-  --logo-crop: inset(0 0 0 0);    /* crop transparent padding if needed */
-  --logo-h: 240px;                /* set at runtime by JS to actual logo height */
+  /* timings */
+  --wash-duration: 2s;   /* layer A rise */
+  --warm-shift:    0.8s; /* layer B fade-in */
+  --final-fade:    1.2s; /* layer C fade-in */
+  --text-delay:    2s;   /* content appears */
+  --overlay-fade:  2s;   /* white overlay fades */
 }
 
-/* ===== Reset & Base ===== */
-*{ box-sizing:border-box; margin:0 }
-html, body{ height:100% }
+/* Reset & base */
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
 body{
-  background: var(--offwhite);
+  background: var(--offwhite);   /* start warm off-white */
   color:#111;
-  font:16px/1.5 'Roboto Mono', monospace;
-  overflow:hidden; position:relative;
-
-  /* center horizontally, sit higher vertically */
-  display:flex; justify-content:center; align-items:flex-start;
+  font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  overflow:hidden;
+  position:relative;
 }
 
-/* ===== Animated Gradient Layers ===== */
-.layer-a, .layer-b, .layer-c{
+/* ================== GRADIENT LAYERS ================== */
+/* A: white→yellow→orange rises from bottom (hides white base) */
+.layer-a,
+.layer-b,
+.layer-c{
   position: fixed; inset: auto 0 0 0;
-  height: 0%;
+  height: 0%;               /* start collapsed at bottom */
   pointer-events: none;
-  z-index: -1;
+  z-index: -1;              /* behind content, above body base */
 }
-/* A: offwhite → yellow → orange */
 .layer-a{
   background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 50%, var(--orange) 100%);
   animation: rise var(--wash-duration) ease-out forwards;
 }
-/* B: warm shift to red */
+
+/* B: warm shift to red at bottom */
 .layer-b{
-  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 10%, var(--orange) 50%, var(--red) 100%);
+  background: linear-gradient(to bottom, var(--yellow) 0%, var(--orange) 50%, var(--red) 100%);
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--warm-shift) ease-in forwards var(--wash-duration);
 }
-/* C: final gradient with purple lower */
+
+/* C: final gradient (purple starts lower ~25%) */
 .layer-c{
-  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 15%, var(--orange) 20%, var(--red) 20%, var(--purple) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--red) 0%,
+    var(--red) 25%,
+    var(--purple) 100%
+  );
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--final-fade) ease-in forwards calc(var(--wash-duration) + var(--warm-shift));
 }
 
-/* Soften initial wipe */
+/* ================== OVERLAY & CONTENT ================== */
+/* White overlay to soften the initial wipe line */
 .overlay-white{
   position: fixed; inset: 0;
   background: var(--white);
@@ -68,99 +74,46 @@ body{
   z-index: 9999;
 }
 
-/* ===== Content layout ===== */
+/* Page/content fade-in */
 .page{
-  width:100%;
-  max-width:1100px;
-  margin:0 auto;
-  padding:12vh 24px 10vh; /* controls vertical position */
+  opacity:0;
+  animation: textIn .8s ease forwards var(--text-delay);
+  position: relative;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 14vh 24px 10vh;
 }
 
-.brand-row{
-  display:flex;
-  align-items:flex-start;
-  gap:var(--col-gap);
-  justify-content:center; /* keeps logo+text centered horizontally */
-}
-
-/* Left: logo sized by measured height */
-.logo{
-  height: var(--logo-h);
-  width:auto;
-  display:block;
-  clip-path: var(--logo-crop);
-}
-
-/* Right: text block height matches logo height; grid ensures top/bottom alignment */
-.name-block{
-  width:var(--name-columns-width);
-  height:var(--logo-h);
-  display:grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap:0;
-  font-size:var(--title-size);
-  text-transform:uppercase;
-  letter-spacing:.02em;
-}
-.name-line{
-  margin:0;
-  display:flex; align-items:center; /* vertical centering each row */
-  line-height:1;
-  white-space:nowrap;
-}
-
-/* CTA centered under the whole block */
-.cta{
-  margin-top:60px;
-  display:flex;
-  justify-content:center;
-}
+/* Hero + CTA */
+.hero{ text-align:left; }
+.hero h1{ font-size: clamp(28px,5vw,56px); line-height:1.1; margin:0 0 12px; font-weight:800; }
+.hero p { font-size: clamp(16px,2.3vw,22px); margin:0 0 24px; }
 .btn{
-  display:inline-block;
-  padding:18px 36px;
-  font-size:18px;
-  border-radius:8px;
-  background:#111; color:#fff;
-  text-decoration:none; font-weight:700;
-  border:2px solid #111;
-  transition:transform .1s ease, box-shadow .1s ease, background .2s ease, color .2s ease;
+  display:inline-block; padding:12px 18px; border-radius:999px;
+  background:#111; color:#fff; text-decoration:none; font-weight:700;
   box-shadow:0 6px 20px rgba(0,0,0,.15);
 }
-.btn:hover{ transform:translateY(-2px); }
-.btn:active{ transform:translateY(0); box-shadow:0 3px 12px rgba(0,0,0,.18); }
-.btn:focus-visible{ outline:none; box-shadow:0 0 0 4px rgba(17,17,17,.2); }
 
-/* Revision label */
+/* Revision label (always visible) */
 .revision{
   position: fixed; left:14px; bottom:10px;
   font-size:14px; color:#000; opacity:.85;
-  z-index: 10000;
+  z-index: 10000; /* above overlay */
 }
 
-/* Keyframes */
+/* ================== KEYFRAMES ================== */
 @keyframes rise   { from{height:0%} to{height:100%} }
 @keyframes fillUp { from{height:0%} to{height:100%} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 @keyframes overlayFade { from{opacity:1} to{opacity:0} }
-@keyframes blink  { 50% { border-color: transparent; } }
+@keyframes textIn { to{opacity:1} }
 
-/* Typing cursor */
-.cursor{
-  display:inline-block;
-  width:.6ch;
-  border-right:.15em solid #111;
-  animation: blink .8s step-end infinite;
-  vertical-align:baseline;
-}
-
-/* Stack nicely on small screens */
-@media (max-width:560px){
-  .brand-row{ flex-direction:column; align-items:flex-start }
-}
-
-/* Reduced motion: show final state immediately */
+/* Accessibility: reduced motion shows final state immediately */
 @media (prefers-reduced-motion: reduce){
   .layer-a, .layer-b, .layer-c{ height:100%; animation:none }
-  .layer-a{ opacity:0 } .layer-b{ opacity:0 } .layer-c{ opacity:1 }
+  .layer-a{ opacity:0 }
+  .layer-b{ opacity:0 }
+  .layer-c{ opacity:1 }
   .overlay-white{ animation:none; opacity:0 }
+  .page{ opacity:1; animation:none }
 }
