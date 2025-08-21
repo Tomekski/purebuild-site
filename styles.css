@@ -52,7 +52,7 @@ body{
 }
 /* C: final gradient with purple lower */
 .layer-c{
-  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--offwhite) 50%, var(--yellow) 15%, var(--orange) 20%, var(--red) 20%, var(--purple) 100%);
+  background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 15%, var(--orange) 20%, var(--red) 20%, var(--purple) 100%);
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
