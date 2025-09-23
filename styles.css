@@ -19,29 +19,24 @@
 * { box-sizing: border-box; margin: 0; }
 html, body { height: 100%; }
 body{
-  background: var(--offwhite);   /* start warm off-white */
+  background: var(--offwhite);
   color:#111;
   font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  overflow:hidden;
+  overflow-x:hidden;
   position:relative;
 }
 
 /* ================== GRADIENT LAYERS ================== */
-/* A: white→yellow→orange rises from bottom (hides white base) */
-.layer-a,
-.layer-b,
-.layer-c{
+.layer-a, .layer-b, .layer-c{
   position: fixed; inset: auto 0 0 0;
-  height: 0%;               /* start collapsed at bottom */
+  height: 0%;
   pointer-events: none;
-  z-index: -1;              /* behind content, above body base */
+  z-index: -1;
 }
 .layer-a{
   background: linear-gradient(to bottom, var(--offwhite) 0%, var(--yellow) 50%, var(--orange) 100%);
   animation: rise var(--wash-duration) ease-out forwards;
 }
-
-/* B: warm shift to red at bottom */
 .layer-b{
   background: linear-gradient(to bottom, var(--yellow) 0%, var(--orange) 50%, var(--red) 100%);
   opacity: 0;
@@ -49,23 +44,15 @@ body{
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--warm-shift) ease-in forwards var(--wash-duration);
 }
-
-/* C: final gradient (purple starts lower ~25%) */
 .layer-c{
-  background: linear-gradient(
-    to bottom,
-    var(--red) 0%,
-    var(--red) 25%,
-    var(--purple) 100%
-  );
+  background: linear-gradient(to bottom, var(--red) 0%, var(--red) 25%, var(--purple) 100%);
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--final-fade) ease-in forwards calc(var(--wash-duration) + var(--warm-shift));
 }
 
-/* ================== OVERLAY & CONTENT ================== */
-/* White overlay to soften the initial wipe line */
+/* White overlay soften */
 .overlay-white{
   position: fixed; inset: 0;
   background: var(--white);
@@ -74,31 +61,92 @@ body{
   z-index: 9999;
 }
 
-/* Page/content fade-in */
+/* ================== LAYOUT & TYPO ================== */
 .page{
   opacity:0;
   animation: textIn .8s ease forwards var(--text-delay);
   position: relative;
   max-width: 950px;
   margin: 0 auto;
-  padding: 14vh 24px 10vh;
+  padding: 16vh 24px 12vh;
 }
+.inner .page{ padding: 18vh 24px 12vh; } /* push content below topnav on inner pages */
 
-/* Hero + CTA */
+h1{ font-size: clamp(28px,5vw,56px); line-height:1.1; margin:0 0 14px; font-weight:800; }
+h2{ font-size: clamp(20px,3vw,28px); margin: 26px 0 10px; }
+p { margin: 0 0 16px; }
+.list{ padding-left: 18px; }
+.list li{ margin: 6px 0; }
+
+/* ================== NAV ================== */
+.topnav{
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+  width: min(100%, 1100px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  z-index: 10000;
+  backdrop-filter: blur(6px);
+}
+.brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:#111; font-weight:800; }
+.logo{ height:28px; width:auto; display:block; }
+nav{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.navlink{ padding:8px 12px; border-radius:10px; text-decoration:none; color:#111; font-weight:600; }
+.navlink:hover{ background: rgba(0,0,0,.06); }
+.nav-cta{ padding:10px 14px; }
+
+/* ================== HERO + BUTTONS ================== */
 .hero{ text-align:left; }
-.hero h1{ font-size: clamp(28px,5vw,56px); line-height:1.1; margin:0 0 12px; font-weight:800; }
-.hero p { font-size: clamp(16px,2.3vw,22px); margin:0 0 24px; }
+.hero p { font-size: clamp(16px,2.3vw,22px); margin:0 0 20px; }
+.btn-row{ display:flex; gap:10px; flex-wrap:wrap; }
 .btn{
   display:inline-block; padding:12px 18px; border-radius:999px;
   background:#111; color:#fff; text-decoration:none; font-weight:700;
   box-shadow:0 6px 20px rgba(0,0,0,.15);
 }
+.btn-secondary{
+  display:inline-block; padding:12px 18px; border-radius:999px;
+  background: rgba(0,0,0,.08); color:#111; text-decoration:none; font-weight:700;
+  border:1px solid rgba(0,0,0,.12);
+}
+.btn-secondary:hover{ background: rgba(0,0,0,.12); }
 
-/* Revision label (always visible) */
+/* Services grid */
+.services{
+  display:grid; gap:14px; margin: 10px 0 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+}
+.services section{
+  background: rgba(255,255,255,.7);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px; padding:16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+/* FAQ details */
+details{ background: rgba(255,255,255,.7); border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:14px 16px; margin:10px 0; }
+details > summary{ cursor:pointer; font-weight:700; margin:0 0 6px; }
+
+/* Contact form */
+.form{ display:grid; gap:12px; max-width: 680px; }
+.form label{ display:grid; gap:6px; font-weight:600; }
+.form input, .form select, .form textarea{
+  padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,.18);
+  background: rgba(255,255,255,.85); outline:none;
+}
+.form input:focus, .form select:focus, .form textarea:focus{ border-color:#111; }
+
+/* Footer */
+.site-foot{
+  position: relative; z-index: 1;
+  max-width: 950px; margin: 0 auto; padding: 24px;
+  text-align:center; opacity:.9;
+}
+
+/* Revision label */
 .revision{
   position: fixed; left:14px; bottom:10px;
   font-size:14px; color:#000; opacity:.85;
-  z-index: 10000; /* above overlay */
+  z-index: 10000;
 }
 
 /* ================== KEYFRAMES ================== */
