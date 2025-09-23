@@ -75,14 +75,14 @@ body{
   padding: 16vh 24px 12vh;
 }
 
-/* Homepage centering */
-body:not(.inner) .page{
+/* Homepage layout — hero shifted up */
+body:not(.inner) .page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;   /* align content towards top */
   align-items: center;
   min-height: 100vh;
-  padding: 0 24px;
+  padding: 18vh 24px 12vh;       /* 18vh from top pushes hero down a bit */
 }
 
 /* Top nav stays above everything */
