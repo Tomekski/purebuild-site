@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Purebuild Consulting — Residential Structural Engineering</title>
   <meta name="description" content="Purebuild Consulting — residential structural engineering, done clearly." />
-
-  <!-- Cache-bust while iterating: bump the rev number when you change styles.css -->
-  <link rel="stylesheet" href="styles.css?v=rev6" />
+  <link rel="stylesheet" href="styles.css?v=rev7" />
 </head>
 <body>
 
@@ -15,23 +13,46 @@
   <div class="layer-a" aria-hidden="true"></div>
   <div class="layer-b" aria-hidden="true"></div>
   <div class="layer-c" aria-hidden="true"></div>
-
-  <!-- Soft white overlay to hide the wipe seam -->
   <div class="overlay-white" aria-hidden="true"></div>
+
+  <!-- Top nav -->
+  <header class="topnav">
+    <a class="brand" href="index.html" aria-label="Purebuild Consulting home">
+      <img src="Logo.png" alt="" class="logo" />
+      <span>Purebuild</span>
+    </a>
+    <nav>
+      <a class="navlink" href="about.html">About</a>
+      <a class="navlink" href="services.html">Services</a>
+      <a class="navlink" href="faq.html">FAQ</a>
+      <a class="btn nav-cta" href="contact.html">Contact</a>
+    </nav>
+  </header>
 
   <!-- Content -->
   <main class="page">
     <section class="hero" role="banner">
       <h1>Purebuild Consulting</h1>
       <p>Residential structural engineering, done clearly.</p>
-      <!-- Replace href with your contact link or quote form -->
-      <a class="btn" href="#quote" aria-label="Get a quote">Get a quote</a>
+
+      <div class="btn-row">
+        <a class="btn" href="contact.html#quote" aria-label="Get a quote">Get a quote</a>
+        <a class="btn-secondary" href="services.html">View services</a>
+        <a class="btn-secondary" href="about.html">About</a>
+        <a class="btn-secondary" href="faq.html">FAQ</a>
+      </div>
     </section>
   </main>
 
-  <!-- Always-visible tiny revision label (bottom-left) -->
-  <div class="revision">Rev 1</div>
+  <footer class="site-foot">
+    <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
+  </footer>
 
-  <!-- No JS required. Keep this file minimal for GitHub Pages. -->
+  <div class="revision">Rev 2</div>
+
+  <script>
+    // tiny helper for the year; safe for GitHub Pages
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
