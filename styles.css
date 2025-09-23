@@ -1,4 +1,4 @@
-/* Google Font */
+/* --- Import Google Font --- */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap');
 
 /* --- Brand colours --- */
@@ -24,7 +24,7 @@ html, body { height: 100%; }
 body{
   background: var(--offwhite);
   color:#111;
-  font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font:16px/1.5 'Roboto Mono', monospace;
   overflow-x:hidden;
   position:relative;
 }
@@ -75,10 +75,20 @@ body{
   padding: 16vh 24px 12vh;
 }
 
+/* Homepage centering */
+body:not(.inner) .page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 24px;
+}
+
 /* Top nav stays above everything */
 .topnav{ z-index: 10000; }
 
-/* Brand/logo — safe sizing if you add the image back later */
+/* Brand/logo — safe sizing */
 .logo{
   height:28px;
   width:auto;
@@ -86,16 +96,7 @@ body{
   display:block;
 }
 
-
 /* ================== LAYOUT & TYPO ================== */
-.page{
-  opacity:0;
-  animation: textIn .8s ease forwards var(--text-delay);
-  position: relative;
-  max-width: 950px;
-  margin: 0 auto;
-  padding: 16vh 24px 12vh;
-}
 .inner .page{ padding: 18vh 24px 12vh; } /* push content below topnav on inner pages */
 
 h1{ font-size: clamp(28px,5vw,56px); line-height:1.1; margin:0 0 14px; font-weight:800; }
@@ -121,9 +122,9 @@ nav{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 .nav-cta{ padding:10px 14px; }
 
 /* ================== HERO + BUTTONS ================== */
-.hero{ text-align:left; }
+.hero{ text-align:center; }
 .hero p { font-size: clamp(16px,2.3vw,22px); margin:0 0 20px; }
-.btn-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.btn-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
 .btn{
   display:inline-block; padding:12px 18px; border-radius:999px;
   background:#111; color:#fff; text-decoration:none; font-weight:700;
