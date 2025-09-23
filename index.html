@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Purebuild Consulting — Residential Structural Engineering</title>
   <meta name="description" content="Purebuild Consulting — residential structural engineering, done clearly." />
-  <link rel="stylesheet" href="styles.css?v=rev7" />
+  <link rel="stylesheet" href="styles.css?v=rev8" />
 </head>
 <body>
 
@@ -18,7 +18,7 @@
   <!-- Top nav -->
   <header class="topnav">
     <a class="brand" href="index.html" aria-label="Purebuild Consulting home">
-      <img src="Logo.png" alt="" class="logo" />
+      <!-- Temporarily text-only brand; add <img class="logo" src="Logo.png" alt="" /> later -->
       <span>Purebuild</span>
     </a>
     <nav>
@@ -34,9 +34,8 @@
     <section class="hero" role="banner">
       <h1>Purebuild Consulting</h1>
       <p>Residential structural engineering, done clearly.</p>
-
       <div class="btn-row">
-        <a class="btn" href="contact.html#quote" aria-label="Get a quote">Get a quote</a>
+        <a class="btn" href="contact.html#quote">Get a quote</a>
         <a class="btn-secondary" href="services.html">View services</a>
         <a class="btn-secondary" href="about.html">About</a>
         <a class="btn-secondary" href="faq.html">FAQ</a>
@@ -48,10 +47,9 @@
     <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
   </footer>
 
-  <div class="revision">Rev 2</div>
+  <div class="revision">Rev 3</div>
 
   <script>
-    // tiny helper for the year; safe for GitHub Pages
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
