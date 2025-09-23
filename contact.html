@@ -1,32 +1,57 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact – Purebuild Consulting</title>
-  <meta name="description" content="Contact form">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Purebuild Consulting</title>
+  <meta name="description" content="Get a quote for residential structural engineering." />
+  <link rel="stylesheet" href="styles.css?v=rev7" />
 </head>
-<body>
-<header><nav>
-<a href="index.html">Home</a> |
-<a href="services.html">Services</a> |
-<a href="projects.html">Projects</a> |
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a>
-</nav></header>
-<main>
-<h1>Contact</h1>
-<form action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
-<label>Name <input type="text" name="name" required></label><br>
-<label>Email <input type="email" name="email" required></label><br>
-<label>Message <textarea name="message"></textarea></label><br>
-<button type="submit">Send</button>
-</form>
-</main>
-<footer>
-<p>© 2025 Purebuild Consulting Ltd – Structural Engineering Services London</p>
-<p><a href="privacy.html">Privacy Policy</a></p>
-</footer>
+<body class="inner">
+  <header class="topnav">
+    <a class="brand" href="index.html"><img src="Logo.png" class="logo" alt="" /><span>Purebuild</span></a>
+    <nav>
+      <a class="navlink" href="services.html">Services</a>
+      <a class="navlink" href="faq.html">FAQ</a>
+      <a class="navlink" href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Contact</h1>
+    <p>Email: <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></p>
+
+    <h2 id="quote">Request a quote</h2>
+    <form class="form" method="GET" action="mailto:hello@yourdomain.com">
+      <label>
+        Your name
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Project type
+        <select name="type" required>
+          <option value="beam">Beam / wall removal</option>
+          <option value="extension">Extension</option>
+          <option value="loft">Loft conversion</option>
+          <option value="report">Site visit / report</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="6" placeholder="Tell me briefly about the property and what you’d like to do." required></textarea>
+      </label>
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </main>
+
+  <footer class="site-foot">
+    <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
