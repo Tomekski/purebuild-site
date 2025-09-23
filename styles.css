@@ -52,14 +52,37 @@ body{
     fadeIn var(--final-fade) ease-in forwards calc(var(--wash-duration) + var(--warm-shift));
 }
 
-/* White overlay soften */
+/* White overlay to soften the initial wipe line */
 .overlay-white{
   position: fixed; inset: 0;
   background: var(--white);
   animation: overlayFade var(--overlay-fade) ease-out forwards;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 1;           /* was 9999 — now safely behind content */
 }
+
+/* Page/content */
+.page{
+  opacity:0;
+  animation: textIn .8s ease forwards var(--text-delay);
+  position: relative;
+  z-index: 2;           /* ensure above overlay */
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 16vh 24px 12vh;
+}
+
+/* Top nav stays above everything */
+.topnav{ z-index: 10000; }
+
+/* Brand/logo — safe sizing if you add the image back later */
+.logo{
+  height:28px;
+  width:auto;
+  max-width:160px;      /* extra safety */
+  display:block;
+}
+
 
 /* ================== LAYOUT & TYPO ================== */
 .page{
