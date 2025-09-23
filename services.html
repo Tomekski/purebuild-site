@@ -1,26 +1,53 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Services – Purebuild Consulting</title>
-  <meta name="description" content="Our services">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services — Purebuild Consulting</title>
+  <meta name="description" content="Structural engineering services for residential projects." />
+  <link rel="stylesheet" href="styles.css?v=rev7" />
 </head>
-<body>
-<header><nav>
-<a href="index.html">Home</a> |
-<a href="services.html">Services</a> |
-<a href="projects.html">Projects</a> |
-<a href="about.html">About</a> |
-<a href="contact.html">Contact</a>
-</nav></header>
-<main>
-<h1>Services</h1><ul><li>Beam design & wall removals</li><li>Loft conversions</li><li>Extensions</li><li>Structural surveys</li></ul>
-</main>
-<footer>
-<p>© 2025 Purebuild Consulting Ltd – Structural Engineering Services London</p>
-<p><a href="privacy.html">Privacy Policy</a></p>
-</footer>
+<body class="inner">
+  <header class="topnav">
+    <a class="brand" href="index.html"><img src="Logo.png" class="logo" alt="" /><span>Purebuild</span></a>
+    <nav>
+      <a class="navlink" href="about.html">About</a>
+      <a class="navlink" href="faq.html">FAQ</a>
+      <a class="btn nav-cta" href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Services</h1>
+    <div class="services">
+      <section>
+        <h2>Beam design & wall removals</h2>
+        <p>Design of steel/laminated timber beams and padstones when opening up rooms or creating kitchen-diners.</p>
+      </section>
+      <section>
+        <h2>Extensions</h2>
+        <p>Foundations and superstructure for rear/side extensions, including lintels, beams, and stability checks.</p>
+      </section>
+      <section>
+        <h2>Loft conversions</h2>
+        <p>Floor strengthening, purlins, ridge beams, and stability design for dormers and roof alterations.</p>
+      </section>
+      <section>
+        <h2>Site visits & reports</h2>
+        <p>On-site assessment for cracks, deflection, or remedial details, followed by a concise report.</p>
+      </section>
+      <section>
+        <h2>Calculations for Building Control</h2>
+        <p>Clear, well-structured calcs and sketches to support your application and your builder.</p>
+      </section>
+    </div>
+
+    <p><a class="btn" href="contact.html#quote">Request a quote</a></p>
+  </main>
+
+  <footer class="site-foot">
+    <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
