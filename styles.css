@@ -14,8 +14,8 @@
   --wash-duration: 2s;   /* layer A rise */
   --warm-shift:    0.8s; /* layer B fade-in */
   --final-fade:    1.2s; /* layer C fade-in */
-  --text-delay:    2s;   /* content appears */
-  --overlay-fade:  2s;   /* white overlay fades */
+  --text-delay:    1.5s;   /* content appears */
+  --overlay-fade:  1.5s;   /* white overlay fades */
 }
 
 /* Reset & base */
