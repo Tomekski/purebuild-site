@@ -48,7 +48,7 @@ body{
     fadeIn var(--warm-shift) ease-in forwards var(--wash-duration);
 }
 .layer-c{
-  background: linear-gradient(to bottom, var(--red) 0%, var(--red) 25%, var(--purple) 100%);
+  background: linear-gradient(to bottom, var(--white) 0%, var(--offwhite) 10%, var(--red) 0%, var(--red) 25%, var(--purple) 100%);
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
