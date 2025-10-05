@@ -14,8 +14,8 @@
   --wash-duration: 2s;   /* layer A rise */
   --warm-shift:    0.8s; /* layer B fade-in */
   --final-fade:    1.2s; /* layer C fade-in */
-  --text-delay:    1.5s;   /* content appears */
-  --overlay-fade:  1.5s;   /* white overlay fades */
+  --text-delay:    1.5s; /* content appears */
+  --overlay-fade:  1.5s; /* white overlay fades */
 }
 
 /* Reset & base */
@@ -47,8 +47,16 @@ body{
     fillUp var(--wash-duration) ease-out forwards,
     fadeIn var(--warm-shift) ease-in forwards var(--wash-duration);
 }
+/* UPDATED: full-spectrum final gradient with a lighter top (0–20%) */
 .layer-c{
-  background: linear-gradient(to bottom, var(--white) 0%, var(--offwhite) 10%, var(--red) 0%, var(--red) 25%, var(--purple) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--offwhite) 0%,
+    var(--yellow)   20%,
+    var(--orange)   40%,
+    var(--red)      70%,
+    var(--purple)   100%
+  );
   opacity: 0;
   animation:
     fillUp var(--wash-duration) ease-out forwards,
