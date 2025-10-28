@@ -4,363 +4,369 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Design Services • Purebuild Consulting</title>
-  <meta name="description" content="Clear, practical structural engineering services for home projects in London — small jobs and complex packages." />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Optional: your shared stylesheet (keeps typographic rhythm consistent) -->
-  <link rel="stylesheet" href="styles.css">
-
+  <meta name="description" content="Clear, practical structural engineering services for home projects in London – small jobs and complex packages." />
+  <link rel="stylesheet" href="styles.css" />
+  
   <style>
-    /* ===============================
-       Site tokens (match the rest)
-       =============================== */
-    :root{
-      --offwhite: #fff8e6;  /* site background */
-      --text: #111;
-      --muted: rgba(0,0,0,.65);
-      --border: #111;
-      --shadow: 0 10px 25px rgba(0,0,0,.08);
-      --radius-2xl: 22px;
-      --radius-xl: 16px;
-      --pill-pad-y: 12px;
-      --pill-pad-x: 18px;
-      --maxw: 1100px;
-    }
-
-    html, body {
-      background: var(--offwhite);
-      color: var(--text);
-      font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Page enter fade (to match other pages) */
-    .page-enter {
-      opacity: 0;
-      transform: translateY(6px);
-      animation: fadeInUp .45s ease-out forwards;
-      animation-delay: .05s;
-    }
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===============================
-       Header — identical feel
-       =============================== */
-    .site-header{
-      position: sticky; top: 0; z-index: 50;
-      height: 64px;      /* fixed height prevents layout shift */
-      background: var(--offwhite); /* same as page to avoid visible seam */
-    }
-    .site-header .wrap{
-      height: 64px; max-width: var(--maxw);
-      margin: 0 auto; padding: 0 20px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .brand{
-      display: inline-flex; align-items: center; gap: 10px;
-      text-decoration: none; color: inherit;
-      line-height: 1;  /* avoids vertical nudge when fonts load */
-    }
-    .brand img{
-      width: 28px; height: 28px; border-radius: 6px; display:block;
-    }
-    .brand span{ font-weight: 700; }
-
-    .main-nav{
-      display: inline-flex; align-items: center; gap: 24px;
-      line-height: 1;
-    }
-    .nav-link{
-      text-decoration: none; color: inherit; opacity: .85;
-      transition: opacity .15s ease;
-    }
-    .nav-link:hover{ opacity: 1; }
-    .nav-link.is-active{
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-    .pill-btn{
-      display:inline-block;
-      padding: var(--pill-pad-y) var(--pill-pad-x);
-      border-radius: 999px;
-      background:#111; color:#fff; text-decoration:none;
-      box-shadow: 0 6px 16px rgba(0,0,0,.15);
-      transition: filter .15s ease;
-    }
-    .pill-btn:hover{ filter: brightness(1.05); }
-
-    /* ===============================
-       Page layout
-       =============================== */
-    .container{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 32px 20px 80px;
-    }
-    .page-title{
+    /* Service page specific styles - extends your styles.css */
+    
+    /* Page title styling */
+    .page-title {
       text-align: center;
       font-weight: 700;
       letter-spacing: .08em;
       font-size: clamp(28px, 4.2vw, 48px);
       margin: 32px 0 8px;
+      text-transform: uppercase;
     }
-    .page-sub{
+    
+    .page-sub {
       text-align: center;
-      color: var(--muted);
+      color: rgba(0,0,0,.65);
       margin-bottom: 28px;
       font-size: 14px;
     }
 
-    /* ===============================
-       Section buttons ("bubbles")
-       =============================== */
-    .section{
-      max-width: 760px; margin: 0 auto 18px;
+    /* Section containers */
+    .section {
+      max-width: 760px;
+      margin: 0 auto 18px;
     }
-    .bubble{
+
+    /* Accordion bubble buttons */
+    .bubble {
       width: 100%;
-      background: #fff;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-2xl);
-      box-shadow: var(--shadow);
-      padding: 22px 22px;
+      background: rgba(255,255,255,.85);
+      border: 2px solid #111;
+      border-radius: 22px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      padding: 22px;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
       cursor: pointer;
-      transition: box-shadow .15s ease, transform .05s ease, border-color .15s ease;
+      transition: box-shadow .15s ease, transform .05s ease;
     }
-    .bubble:hover{ box-shadow: 0 14px 30px rgba(0,0,0,.12); }
-    .bubble:active{ transform: translateY(1px); }
+    
+    .bubble:hover {
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+    
+    .bubble:active {
+      transform: translateY(1px);
+    }
 
-    .bubble h3{
-      margin: 0; font-size: 28px; letter-spacing: .08em;
+    .bubble h3 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: .08em;
       text-transform: uppercase;
-    }
-    .bubble small{
-      display:block; margin-top: 6px; color: var(--muted);
-      font-size: 12px;
-    }
-    .chev{
-      width: 36px; height: 36px; border-radius: 999px;
-      border: 2px solid var(--border);
-      display:inline-grid; place-items:center;
       font-weight: 700;
     }
+    
+    .bubble small {
+      display: block;
+      margin-top: 6px;
+      color: rgba(0,0,0,.65);
+      font-size: 12px;
+    }
 
-    /* Panel content */
-    .panel{
-      display: grid; grid-template-columns: 1fr; gap: 16px;
-      max-height: 0; overflow: hidden;
-      transition: grid-template-rows .3s ease, max-height .3s ease, opacity .25s ease;
+    /* Chevron indicator */
+    .chev {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 2px solid #111;
+      display: inline-grid;
+      place-items: center;
+      font-weight: 700;
+      transition: transform .2s ease;
+    }
+    
+    .bubble[aria-expanded="true"] .chev {
+      transform: rotate(90deg);
+    }
+
+    /* Panel content - accordion */
+    .panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease, opacity .25s ease, padding .3s ease;
       opacity: 0;
     }
-    .panel.open{
+    
+    .panel.open {
       padding: 16px 4px 6px;
       opacity: 1;
-      max-height: 1200px; /* enough for contents; avoids jump */
+      max-height: 1200px;
     }
 
-    /* Lists + preview */
-    .jobs{
-      display: grid; gap: 10px;
+    /* Job list items */
+    .jobs {
+      display: grid;
+      gap: 10px;
     }
-    .job{
+    
+    .job {
       text-align: left;
-      border: 2px solid var(--border);
+      border: 2px solid #111;
       border-radius: 999px;
       padding: 12px 16px;
-      background: #fff;
+      background: rgba(255,255,255,.9);
       cursor: pointer;
       transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
     }
-    .job:hover{ box-shadow: var(--shadow); }
-    .job strong{ font-weight: 700; }
-    .job[aria-selected="true"]{
-      outline: 3px solid #fdb913; /* subtle yellow highlight on selection */
+    
+    .job:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,.1);
+    }
+    
+    .job strong {
+      font-weight: 700;
+    }
+    
+    .job[aria-selected="true"] {
+      outline: 3px solid var(--yellow);
       background: #fffdf5;
     }
 
-    .preview{
+    /* Image preview */
+    .preview {
       margin-top: 6px;
-      display: grid; place-items: center;
-      border-radius: var(--radius-xl);
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
       overflow: hidden;
-      background: #fff;
-      border: 2px solid var(--border);
+      background: rgba(255,255,255,.9);
+      border: 2px solid #111;
       min-height: 260px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
     }
-    .preview img{
-      width: 100%; height: auto; display:block;
-      max-height: 520px; object-fit: cover;
+    
+    .preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 520px;
+      object-fit: cover;
     }
 
-    /* CTA that appears after first click (under the Complex section area) */
-    .cta-wrap{
-      text-align: center; margin-top: 22px;
-      opacity: 0; transform: translateY(6px);
+    /* CTA section */
+    .cta-wrap {
+      text-align: center;
+      margin-top: 22px;
+      opacity: 0;
+      transform: translateY(6px);
       transition: opacity .25s ease, transform .25s ease;
     }
-    .cta-wrap.show{ opacity: 1; transform: translateY(0); }
-
-    /* Utility */
-    .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    
+    .cta-wrap.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .cta-wrap p {
+      margin-bottom: 12px;
     }
 
-    @media (min-width: 860px){
-      .panel-grid{
-        display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px;
+    /* Responsive grid for larger screens */
+    @media (min-width: 860px) {
+      .panel-grid {
+        display: grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 16px;
       }
+    }
+
+    /* Accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
   </style>
 </head>
-<body>
-  <!-- Header -->
-  <header class="site-header" role="banner" aria-label="Site header">
-    <div class="wrap">
-      <a class="brand" href="index.html" aria-label="Go to homepage">
-        <img src="Logo.png" alt="Purebuild logo">
-        <span>Purebuild</span>
-      </a>
-      <nav class="main-nav" aria-label="Primary">
-        <a class="nav-link is-active" href="services.html">Services</a>
-        <a class="nav-link" href="faq.html">FAQ</a>
-        <a class="pill-btn" href="contact.html">Contact</a>
-      </nav>
-    </div>
+<body class="inner">
+  <!-- Gradient layers (from your styles.css) -->
+  <div class="layer-a"></div>
+  <div class="layer-b"></div>
+  <div class="layer-c"></div>
+  <div class="overlay-white"></div>
+
+  <!-- Header - matches your existing structure -->
+  <header class="topnav">
+    <a class="brand" href="index.html">
+      <img src="Logo.png" class="logo" alt="" />
+      <span>Purebuild</span>
+    </a>
+    <nav>
+      <a class="navlink" href="about.html">About</a>
+      <a class="navlink" href="services.html">Services</a>
+      <a class="navlink" href="faq.html">FAQ</a>
+      <a class="btn nav-cta" href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <!-- Main -->
-  <main id="main" class="page-enter" tabindex="-1">
-    <div class="container">
-      <h1 class="page-title">DESIGN SERVICES</h1>
-      <p class="page-sub">Clear, practical engineering for home projects. Click a section to expand.</p>
+  <!-- Main content -->
+  <main class="page">
+    <h1 class="page-title">Design Services</h1>
+    <p class="page-sub">Clear, practical engineering for home projects. Click a section to expand.</p>
 
-      <!-- SMALL JOBS -->
-      <section class="section" id="small">
-        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-small">
-          <div>
-            <h3>Small Jobs</h3>
-            <small>Smaller works with fewer elements</small>
+    <!-- SMALL JOBS -->
+    <section class="section" id="small">
+      <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-small">
+        <div>
+          <h3>Small Jobs</h3>
+          <small>Smaller works with fewer elements</small>
+        </div>
+        <span class="chev">›</span>
+      </button>
+
+      <div id="panel-small" class="panel" role="region" aria-labelledby="small">
+        <div class="panel-grid">
+          <div class="jobs" role="listbox" aria-label="Small jobs">
+            <button class="job" role="option" data-img="images/lintel.png">
+              <strong>Lintel design</strong> – openings in walls
+            </button>
+            <button class="job" role="option" data-img="images/beam.png">
+              <strong>Single steel beam</strong> – simple support
+            </button>
+            <button class="job" role="option" data-img="images/wall-removal.png">
+              <strong>Wall removal</strong> – load path checks
+            </button>
+            <button class="job" role="option" data-img="images/chimney.png">
+              <strong>Chimney breast removal</strong> – safe support & checks
+            </button>
           </div>
-          <span class="chev">›</span>
-        </button>
-
-        <div id="panel-small" class="panel" role="region" aria-labelledby="small">
-          <div class="panel-grid">
-            <div class="jobs" role="listbox" aria-label="Small jobs">
-              <button class="job" role="option" data-img="images/lintel.png"><strong>Lintel design</strong> — openings in walls</button>
-              <button class="job" role="option" data-img="images/beam.png"><strong>Single steel beam</strong> — simple support</button>
-              <button class="job" role="option" data-img="images/wall-removal.png"><strong>Wall removal</strong> — load path checks</button>
-              <button class="job" role="option" data-img="images/chimney.png"><strong>Chimney breast removal</strong> — safe support & checks</button>
-            </div>
-            <div class="preview" aria-live="polite" aria-atomic="true">
-              <img src="images/lintel.png" alt="Example small job preview" />
-            </div>
+          <div class="preview" aria-live="polite" aria-atomic="true">
+            <img src="images/lintel.png" alt="Example small job preview" />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- COMPLEX JOBS -->
-      <section class="section" id="complex">
-        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-complex">
-          <div>
-            <h3>Complex Jobs</h3>
-            <small>Involved design packages</small>
+    <!-- COMPLEX JOBS -->
+    <section class="section" id="complex">
+      <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-complex">
+        <div>
+          <h3>Complex Jobs</h3>
+          <small>Involved design packages</small>
+        </div>
+        <span class="chev">›</span>
+      </button>
+
+      <div id="panel-complex" class="panel" role="region" aria-labelledby="complex">
+        <div class="panel-grid">
+          <div class="jobs" role="listbox" aria-label="Complex jobs">
+            <button class="job" role="option" data-img="images/rear.png">
+              <strong>Rear extension</strong> – layout & beams
+            </button>
+            <button class="job" role="option" data-img="images/loft.png">
+              <strong>Loft conversion</strong> – new joists & supports
+            </button>
+            <button class="job" role="option" data-img="images/open.png">
+              <strong>Open-plan works</strong> – frames & bearings
+            </button>
+            <button class="job" role="option" data-img="images/side.png">
+              <strong>Side extension</strong> – coordination & checks
+            </button>
           </div>
-          <span class="chev">›</span>
-        </button>
-
-        <div id="panel-complex" class="panel" role="region" aria-labelledby="complex">
-          <div class="panel-grid">
-            <div class="jobs" role="listbox" aria-label="Complex jobs">
-              <button class="job" role="option" data-img="images/rear.png"><strong>Rear extension</strong> — layout & beams</button>
-              <button class="job" role="option" data-img="images/loft.png"><strong>Loft conversion</strong> — new joists & supports</button>
-              <button class="job" role="option" data-img="images/open.png"><strong>Open-plan works</strong> — frames & bearings</button>
-              <button class="job" role="option" data-img="images/side.png"><strong>Side extension</strong> — coordination & checks</button>
-            </div>
-            <div class="preview" aria-live="polite" aria-atomic="true">
-              <img src="images/rear.png" alt="Example complex job preview" />
-            </div>
-          </div>
-
-          <!-- CTA appears after the first click on any job -->
-          <div id="cta" class="cta-wrap" aria-live="polite">
-            <p>This list is not exhaustive — if you don’t see your project type, please get in touch!</p>
-            <p><a class="pill-btn" href="contact.html" aria-label="Go to contact page">Get in touch</a></p>
+          <div class="preview" aria-live="polite" aria-atomic="true">
+            <img src="images/rear.png" alt="Example complex job preview" />
           </div>
         </div>
-      </section>
-    </div>
+
+        <!-- CTA appears after first click -->
+        <div id="cta" class="cta-wrap" aria-live="polite">
+          <p>This list is not exhaustive – if you don't see your project type, please get in touch!</p>
+          <p><a class="btn" href="contact.html">Get in touch</a></p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <script>
-    // ---------- Header link focus (accessibility nicety)
-    (function(){
-      const main = document.getElementById('main');
-      if (document.readyState === "loading"){
-        document.addEventListener('DOMContentLoaded', ()=>main && main.focus(), {once:true});
-      } else { main && main.focus(); }
-    })();
+  <!-- Footer -->
+  <footer class="site-foot">
+    <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
+  </footer>
 
-    // ---------- Accordion behaviour (no layout jank)
-    (function(){
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Accordion functionality
+    (function() {
       const sections = [
         {btn: document.querySelector('#small .bubble'), panel: document.getElementById('panel-small')},
         {btn: document.querySelector('#complex .bubble'), panel: document.getElementById('panel-complex')}
       ];
 
-      sections.forEach(({btn, panel})=>{
-        if(!btn || !panel) return;
+      sections.forEach(({btn, panel}) => {
+        if (!btn || !panel) return;
 
-        btn.addEventListener('click', ()=>{
+        btn.addEventListener('click', () => {
           const isOpen = panel.classList.contains('open');
-          // close all
-          sections.forEach(({panel:p, btn:b})=>{
+          
+          // Close all panels
+          sections.forEach(({panel: p, btn: b}) => {
             p.classList.remove('open');
-            b.setAttribute('aria-expanded','false');
+            b.setAttribute('aria-expanded', 'false');
           });
-          // open clicked
-          if(!isOpen){
+          
+          // Open clicked panel if it was closed
+          if (!isOpen) {
             panel.classList.add('open');
-            btn.setAttribute('aria-expanded','true');
-            // Scroll the open panel into view a touch (mobile ergonomics)
-            panel.scrollIntoView({block:'nearest', behavior:'smooth'});
+            btn.setAttribute('aria-expanded', 'true');
+            // Smooth scroll into view
+            setTimeout(() => {
+              panel.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            }, 50);
           }
         });
       });
     })();
 
-    // ---------- Image preview + CTA reveal after first click
-    (function(){
+    // Image preview switching + CTA reveal
+    (function() {
       const allLists = document.querySelectorAll('.jobs');
       let revealedCTA = false;
 
-      allLists.forEach(list=>{
-        const preview = list.parentElement.nextElementSibling?.querySelector('img');
+      allLists.forEach(list => {
+        const preview = list.parentElement.querySelector('.preview img');
         const options = list.querySelectorAll('.job');
 
-        options.forEach((opt, idx)=>{
-          // default select first
-          if(idx === 0){ opt.setAttribute('aria-selected','true'); }
+        options.forEach((opt, idx) => {
+          // Select first option by default
+          if (idx === 0) {
+            opt.setAttribute('aria-selected', 'true');
+          }
 
-          opt.addEventListener('click', ()=>{
-            options.forEach(o=>o.setAttribute('aria-selected','false'));
-            opt.setAttribute('aria-selected','true');
+          opt.addEventListener('click', () => {
+            // Update selection
+            options.forEach(o => o.setAttribute('aria-selected', 'false'));
+            opt.setAttribute('aria-selected', 'true');
+            
+            // Update preview image
             const src = opt.getAttribute('data-img');
-            if(preview && src){ preview.src = src; }
+            if (preview && src) {
+              preview.src = src;
+            }
 
-            // Reveal CTA only after any job is clicked (as requested)
-            if(!revealedCTA){
+            // Reveal CTA after first interaction
+            if (!revealedCTA) {
               const cta = document.getElementById('cta');
-              if(cta){ cta.classList.add('show'); }
+              if (cta) {
+                cta.classList.add('show');
+              }
               revealedCTA = true;
             }
           });
