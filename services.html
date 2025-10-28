@@ -46,6 +46,7 @@
       align-items: center;
       cursor: pointer;
       transition: box-shadow .15s ease, transform .05s ease;
+      font-family: 'Roboto Mono', monospace;
     }
     
     .bubble:hover {
@@ -62,6 +63,7 @@
       letter-spacing: .08em;
       text-transform: uppercase;
       font-weight: 700;
+      font-family: 'Roboto Mono', monospace;
     }
     
     .bubble small {
@@ -69,6 +71,7 @@
       margin-top: 6px;
       color: rgba(0,0,0,.65);
       font-size: 12px;
+      font-family: 'Roboto Mono', monospace;
     }
 
     /* Chevron indicator */
@@ -89,9 +92,6 @@
 
     /* Panel content - accordion */
     .panel {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
       max-height: 0;
       overflow: hidden;
       transition: max-height .3s ease, opacity .25s ease, padding .3s ease;
@@ -99,15 +99,16 @@
     }
     
     .panel.open {
-      padding: 16px 4px 6px;
+      padding: 16px 22px 22px;
       opacity: 1;
-      max-height: 1200px;
+      max-height: 1400px;
     }
 
     /* Job list items */
     .jobs {
       display: grid;
       gap: 10px;
+      margin-bottom: 16px;
     }
     
     .job {
@@ -118,10 +119,13 @@
       background: rgba(255,255,255,.9);
       cursor: pointer;
       transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
+      font-family: 'Roboto Mono', monospace;
     }
     
     .job:hover {
       box-shadow: 0 8px 20px rgba(0,0,0,.1);
+      background: linear-gradient(135deg, #fdb913 0%, #f36f21 50%, #ed1c24 100%);
+      color: #fff;
     }
     
     .job strong {
@@ -132,8 +136,13 @@
       outline: 3px solid var(--yellow);
       background: #fffdf5;
     }
+    
+    .job[aria-selected="true"]:hover {
+      background: linear-gradient(135deg, #fdb913 0%, #f36f21 50%, #ed1c24 100%);
+      color: #fff;
+    }
 
-    /* Image preview */
+    /* Image preview - now stacks below jobs */
     .preview {
       margin-top: 6px;
       display: grid;
@@ -170,15 +179,6 @@
     
     .cta-wrap p {
       margin-bottom: 12px;
-    }
-
-    /* Responsive grid for larger screens */
-    @media (min-width: 860px) {
-      .panel-grid {
-        display: grid;
-        grid-template-columns: 1.1fr .9fr;
-        gap: 16px;
-      }
     }
 
     /* Accessibility */
@@ -232,24 +232,22 @@
       </button>
 
       <div id="panel-small" class="panel" role="region" aria-labelledby="small">
-        <div class="panel-grid">
-          <div class="jobs" role="listbox" aria-label="Small jobs">
-            <button class="job" role="option" data-img="images/lintel.png">
-              <strong>Lintel design</strong> – openings in walls
-            </button>
-            <button class="job" role="option" data-img="images/beam.png">
-              <strong>Single steel beam</strong> – simple support
-            </button>
-            <button class="job" role="option" data-img="images/wall-removal.png">
-              <strong>Wall removal</strong> – load path checks
-            </button>
-            <button class="job" role="option" data-img="images/chimney.png">
-              <strong>Chimney breast removal</strong> – safe support & checks
-            </button>
-          </div>
-          <div class="preview" aria-live="polite" aria-atomic="true">
-            <img src="images/lintel.png" alt="Example small job preview" />
-          </div>
+        <div class="jobs" role="listbox" aria-label="Small jobs">
+          <button class="job" role="option" data-img="images/lintel.png">
+            <strong>Lintel design</strong> – openings in walls
+          </button>
+          <button class="job" role="option" data-img="images/beam.png">
+            <strong>Single steel beam</strong> – simple support
+          </button>
+          <button class="job" role="option" data-img="images/wall-removal.png">
+            <strong>Wall removal</strong> – load path checks
+          </button>
+          <button class="job" role="option" data-img="images/chimney.png">
+            <strong>Chimney breast removal</strong> – safe support & checks
+          </button>
+        </div>
+        <div class="preview" aria-live="polite" aria-atomic="true">
+          <img src="images/lintel.png" alt="Example small job preview" />
         </div>
       </div>
     </section>
@@ -265,24 +263,22 @@
       </button>
 
       <div id="panel-complex" class="panel" role="region" aria-labelledby="complex">
-        <div class="panel-grid">
-          <div class="jobs" role="listbox" aria-label="Complex jobs">
-            <button class="job" role="option" data-img="images/rear.png">
-              <strong>Rear extension</strong> – layout & beams
-            </button>
-            <button class="job" role="option" data-img="images/loft.png">
-              <strong>Loft conversion</strong> – new joists & supports
-            </button>
-            <button class="job" role="option" data-img="images/open.png">
-              <strong>Open-plan works</strong> – frames & bearings
-            </button>
-            <button class="job" role="option" data-img="images/side.png">
-              <strong>Side extension</strong> – coordination & checks
-            </button>
-          </div>
-          <div class="preview" aria-live="polite" aria-atomic="true">
-            <img src="images/rear.png" alt="Example complex job preview" />
-          </div>
+        <div class="jobs" role="listbox" aria-label="Complex jobs">
+          <button class="job" role="option" data-img="images/rear.png">
+            <strong>Rear extension</strong> – layout & beams
+          </button>
+          <button class="job" role="option" data-img="images/loft.png">
+            <strong>Loft conversion</strong> – new joists & supports
+          </button>
+          <button class="job" role="option" data-img="images/open.png">
+            <strong>Open-plan works</strong> – frames & bearings
+          </button>
+          <button class="job" role="option" data-img="images/side.png">
+            <strong>Side extension</strong> – coordination & checks
+          </button>
+        </div>
+        <div class="preview" aria-live="polite" aria-atomic="true">
+          <img src="images/rear.png" alt="Example complex job preview" />
         </div>
 
         <!-- CTA appears after first click -->
