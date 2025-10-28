@@ -1,59 +1,241 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Services — Purebuild Consulting</title>
-  <meta name="description" content="Structural engineering services for residential projects." />
-  <link rel="stylesheet" href="styles.css?v=rev8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Purebuild — Design Services (single CTA under Complex)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0f0f0f; --muted:#6f6f6f; --line:#141414; --line-soft:#d9d9d9;
+    --bg:#ffffff; --panel:#fffdfa; --shadow:0 10px 28px rgba(0,0,0,.08);
+    --yellow:#fdb913; --orange:#f36f21; --red:#ed1c24; --purple:#9e005d;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    color:var(--ink);
+    background:linear-gradient(180deg,#ffffff,#fff7ec 65%,#fff2e0);
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:56px 18px 120px}
+  h1{ text-align:center;margin:0 0 18px;font-size:clamp(28px,4.8vw,48px);letter-spacing:.06em;font-weight:700 }
+  .lead{margin:0 0 28px;text-align:center;color:var(--muted);font-size:clamp(14px,2.6vw,16px)}
+
+  /* Bubble */
+  .bubble{
+    border:2px solid var(--line);
+    border-radius:32px;
+    background:var(--bg);
+    box-shadow:var(--shadow);
+    margin:24px auto;
+    max-width:760px;
+    overflow:hidden;
+  }
+  .bubble, .bubble *{ font-family:"Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; }
+  .bubble__head{ width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 22px;background:transparent;border:none;cursor:pointer; }
+  .bubble__titles{width:100%;text-align:center}
+  .bubble__title{ margin:0;font-weight:700;letter-spacing:.04em;font-size:clamp(26px,3.6vw,38px) }
+  .bubble__sub{ margin-top:4px;color:var(--muted);font-size:15px;font-weight:400 }
+  .bubble__chev{ flex:0 0 auto;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);transition:transform .28s ease; }
+  .bubble[aria-expanded="true"] .bubble__chev{ transform:rotate(90deg) }
+
+  .bubble__content{ height:0; overflow:hidden; background:var(--panel); transition:height .38s cubic-bezier(.2,.6,.2,1); will-change:height; }
+  .bubble__inner{ padding:24px 14px 22px; display:grid; gap:16px; max-width:640px; margin:0 auto; text-align:center; }
+
+  /* Jobs */
+  .jobs{display:grid;gap:10px;margin:4px 0 8px}
+  .job{
+    display:flex;align-items:center;justify-content:center; padding:12px 14px;
+    border:2px solid var(--line-soft); background:#fff; color:var(--ink);
+    border-radius:14px; cursor:pointer; transition:transform .06s ease, border-color .12s ease, box-shadow .12s ease;
+  }
+  .job:hover, .job:focus { transform: translateY(-1px); }
+  .jobs .job:nth-child(1):hover, .jobs .job:nth-child(1).is-active{ border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(253,185,19,.22); }
+  .jobs .job:nth-child(2):hover, .jobs .job:nth-child(2).is-active{ border-color: var(--orange); box-shadow: 0 0 0 3px rgba(243,111,33,.22); }
+  .jobs .job:nth-child(3):hover, .jobs .job:nth-child(3).is-active{ border-color: var(--red); box-shadow: 0 0 0 3px rgba(237,28,36,.22); }
+  .jobs .job:nth-child(4):hover, .jobs .job:nth-child(4).is-active{ border-color: var(--purple); box-shadow: 0 0 0 3px rgba(158,0,93,.22); }
+
+  /* Viewer */
+  .viewer{ border:2px solid var(--line-soft); border-radius:16px; background:#fff; min-height:120px; display:grid; place-items:center; padding:18px; color:#444; }
+  .viewer img{ width:100%; height:auto; aspect-ratio:16/10; object-fit:contain; border-radius:12px; }
+
+  /* SINGLE CTA BLOCK (GLOBAL, below Complex bubble) */
+  .cta-block{
+    display:none;
+    margin:18px auto 0;
+    max-width:760px;
+    text-align:center;
+    color:#333;
+    line-height:1.55;
+  }
+  .cta-block.show{ display:block; }
+  .pill-btn{
+    display:inline-block;margin-top:10px;padding:12px 18px;border-radius:9999px;background:#111;color:#fff;
+    font-weight:700;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.18);
+    transition:transform .06s ease, opacity .12s ease;
+  }
+  .pill-btn:hover,.pill-btn:focus{ transform:translateY(-1px); opacity:.95; }
+  :focus-visible{ outline:3px solid #b595ff; outline-offset:3px }
+</style>
 </head>
-<body class="inner">
-  <header class="topnav">
-    <a class="brand" href="index.html">
-      <img src="Logo.png" class="logo" alt="" />
-      <span>Purebuild</span>
-    </a>
-    <nav>
-      <a class="navlink" href="about.html">About</a>
-      <a class="navlink" href="services.html">Services</a>
-      <a class="navlink" href="faq.html">FAQ</a>
-      <a class="btn nav-cta" href="contact.html">Contact</a>
-    </nav>
-  </header>
+<body>
+  <main class="wrap" id="main">
+    <h1>DESIGN SERVICES</h1>
+    <p class="lead">Clear, practical engineering for home projects. Click a section to expand.</p>
 
-  <main class="page">
-    <h1>Services</h1>
-    <div class="services">
-      <section>
-        <h2>Beam design & wall removals</h2>
-        <p>Design of steel/laminated timber beams and padstones when opening up rooms or creating kitchen-diners.</p>
-      </section>
-      <section>
-        <h2>Extensions</h2>
-        <p>Foundations and superstructure for rear/side extensions, including lintels, beams, and stability checks.</p>
-      </section>
-      <section>
-        <h2>Loft conversions</h2>
-        <p>Floor strengthening, purlins, ridge beams, and stability design for dormers and roof alterations.</p>
-      </section>
-      <section>
-        <h2>Site visits & reports</h2>
-        <p>On-site assessment for cracks, deflection, or remedial details, followed by a concise report.</p>
-      </section>
-      <section>
-        <h2>Calculations for Building Control</h2>
-        <p>Clear, well-structured calcs and sketches to support your application and your builder.</p>
-      </section>
+    <!-- SMALL JOBS -->
+    <section class="bubble" id="bubble-small" aria-expanded="false">
+      <button class="bubble__head" type="button" aria-controls="small-content" aria-expanded="false">
+        <div class="bubble__titles">
+          <h2 class="bubble__title">SMALL JOBS</h2>
+          <div class="bubble__sub">Smaller works with fewer elements</div>
+        </div>
+        <div class="bubble__chev" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="8 4 16 12 8 20"></polyline>
+          </svg>
+        </div>
+      </button>
+
+      <div class="bubble__content" id="small-content" role="region" aria-label="Small jobs content">
+        <div class="bubble__inner">
+          <div class="jobs" role="listbox" aria-label="Small jobs">
+            <button class="job" role="option" data-img="lintel"><strong>Lintel design</strong> — openings over doors &amp; windows</button>
+            <button class="job" role="option" data-img="beam"><strong>Single steel beam</strong> — new opening or chimney support</button>
+            <button class="job" role="option" data-img="wall-removal"><strong>Wall removal check</strong> — confirm load-bearing &amp; supports</button>
+            <button class="job" role="option" data-img="chimney"><strong>Chimney breast removal</strong> — safe support &amp; bearing checks</button>
+          </div>
+          <div class="viewer" id="viewer-small"><div class="viewer__content">Select a small job to preview</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPLEX JOBS -->
+    <section class="bubble" id="bubble-complex" aria-expanded="false">
+      <button class="bubble__head" type="button" aria-controls="complex-content" aria-expanded="false">
+        <div class="bubble__titles">
+          <h2 class="bubble__title">COMPLEX JOBS</h2>
+          <div class="bubble__sub">Involved design packages</div>
+        </div>
+        <div class="bubble__chev" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="8 4 16 12 8 20"></polyline>
+          </svg>
+        </div>
+      </button>
+
+      <div class="bubble__content" id="complex-content" role="region" aria-label="Complex jobs content">
+        <div class="bubble__inner">
+          <div class="jobs" role="listbox" aria-label="Complex jobs">
+            <button class="job" role="option" data-img="rear"><strong>Rear extension</strong> — beams, foundations, stability checks</button>
+            <button class="job" role="option" data-img="loft"><strong>Loft conversion</strong> — new joists &amp; steel framing</button>
+            <button class="job" role="option" data-img="open"><strong>Open-plan conversion</strong> — multi-beam frames &amp; verification</button>
+            <button class="job" role="option" data-img="side"><strong>Side extension</strong> — lateral tie-in &amp; foundation checks</button>
+          </div>
+          <div class="viewer" id="viewer-complex"><div class="viewer__content">Select a complex job to preview</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SINGLE GLOBAL CTA UNDER COMPLEX -->
+    <div class="cta-block" id="global-cta" aria-live="polite">
+      This list is not exhaustive — if you don’t see your project type, please get in touch!
+      <br />
+      <a class="pill-btn" href="#" aria-label="Go to contact page (disabled in this demo)" data-demo-contact>Get in touch</a>
     </div>
-
-    <p><a class="btn" href="contact.html#quote">Request a quote</a></p>
   </main>
 
-  <footer class="site-foot">
-    <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
-  </footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<script>
+  // Smooth open/close for bubbles
+  function setupBubble(section){
+    const headBtn = section.querySelector('.bubble__head');
+    const content = section.querySelector('.bubble__content');
+
+    function open(){
+      section.setAttribute('aria-expanded','true');
+      headBtn.setAttribute('aria-expanded','true');
+      content.style.height = '0px';
+      content.offsetHeight;
+      content.style.height = content.scrollHeight + 'px';
+    }
+    function close(){
+      section.setAttribute('aria-expanded','false');
+      headBtn.setAttribute('aria-expanded','false');
+      content.style.height = content.scrollHeight + 'px';
+      content.offsetHeight;
+      content.style.height = '0px';
+    }
+    function toggle(){
+      const isOpen = section.getAttribute('aria-expanded') === 'true';
+      isOpen ? close() : open();
+    }
+    content.addEventListener('transitionend', (e)=>{
+      if(e.propertyName !== 'height') return;
+      const isOpen = section.getAttribute('aria-expanded') === 'true';
+      content.style.height = isOpen ? 'auto' : '0px';
+    });
+    headBtn.addEventListener('click', toggle);
+    headBtn.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  }
+
+  // Singleton CTA reveal
+  const globalCTA = document.getElementById('global-cta');
+  let globalCTAShown = false;
+  function revealGlobalCTA(){
+    if (!globalCTAShown){
+      globalCTA.classList.add('show');
+      globalCTAShown = true;
+    }
+  }
+
+  // Viewer + show CTA on first selection
+  function setupViewer(scopeId, viewerId){
+    const scope  = document.getElementById(scopeId);
+    const viewer = document.getElementById(viewerId);
+    const out    = viewer.querySelector('.viewer__content');
+    const jobs   = Array.from(scope.querySelectorAll('.job'));
+
+    function select(job){
+      jobs.forEach(j=>j.classList.remove('is-active'));
+      job.classList.add('is-active');
+
+      const imgFile = job.getAttribute('data-img');
+      out.innerHTML = imgFile
+        ? `<img src="images/${imgFile}.png" alt="${imgFile} image" loading="lazy">`
+        : 'Preview unavailable';
+
+      revealGlobalCTA();
+
+      if (window.matchMedia('(max-width: 700px)').matches){
+        viewer.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+
+    jobs.forEach(j=>{
+      j.addEventListener('click', ()=>select(j));
+      j.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(j); }
+      });
+    });
+  }
+
+  // Prevent navigation for demo contact button
+  document.addEventListener('click', (e)=>{
+    const a = e.target.closest('a[data-demo-contact]');
+    if(a){ e.preventDefault(); }
+  });
+
+  setupBubble(document.getElementById('bubble-small'));
+  setupBubble(document.getElementById('bubble-complex'));
+  setupViewer('small-content','viewer-small');
+  setupViewer('complex-content','viewer-complex');
+</script>
 </body>
 </html>
