@@ -33,24 +33,33 @@
       margin: 0 auto 18px;
     }
 
-    /* Accordion bubble buttons */
-    .bubble {
+    /* Full bubble wrapper - includes button and expandable content */
+    .bubble-wrapper {
       width: 100%;
       background: rgba(255,255,255,.85);
       border: 2px solid #111;
       border-radius: 22px;
       box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      transition: box-shadow .15s ease;
+      overflow: hidden;
+    }
+    
+    .bubble-wrapper:hover {
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+
+    /* Accordion bubble buttons */
+    .bubble {
+      width: 100%;
+      background: transparent;
+      border: none;
       padding: 22px;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
       cursor: pointer;
-      transition: box-shadow .15s ease, transform .05s ease;
+      transition: transform .05s ease;
       font-family: 'Roboto Mono', monospace;
-    }
-    
-    .bubble:hover {
-      box-shadow: 0 14px 30px rgba(0,0,0,.12);
     }
     
     .bubble:active {
@@ -90,7 +99,7 @@
       transform: rotate(90deg);
     }
 
-    /* Panel content - accordion */
+    /* Panel content - accordion (inside bubble) */
     .panel {
       max-height: 0;
       overflow: hidden;
@@ -99,7 +108,7 @@
     }
     
     .panel.open {
-      padding: 16px 22px 22px;
+      padding: 0 22px 22px;
       opacity: 1;
       max-height: 1400px;
     }
@@ -112,14 +121,15 @@
     }
     
     .job {
-      text-align: left;
+      text-align: center;
       border: 2px solid #111;
       border-radius: 999px;
-      padding: 12px 16px;
+      padding: 14px 18px;
       background: rgba(255,255,255,.9);
       cursor: pointer;
-      transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
+      transition: background .15s ease, transform .05s ease, box-shadow .15s ease, color .15s ease;
       font-family: 'Roboto Mono', monospace;
+      font-size: 15px;
     }
     
     .job:hover {
@@ -142,7 +152,7 @@
       color: #fff;
     }
 
-    /* Image preview - now stacks below jobs */
+    /* Image preview - stacks below jobs */
     .preview {
       margin-top: 6px;
       display: grid;
@@ -161,6 +171,13 @@
       display: block;
       max-height: 520px;
       object-fit: cover;
+    }
+    
+    .preview-placeholder {
+      text-align: center;
+      color: rgba(0,0,0,.5);
+      padding: 40px 20px;
+      font-family: 'Roboto Mono', monospace;
     }
 
     /* CTA section */
@@ -223,68 +240,72 @@
 
     <!-- SMALL JOBS -->
     <section class="section" id="small">
-      <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-small">
-        <div>
-          <h3>Small Jobs</h3>
-          <small>Smaller works with fewer elements</small>
-        </div>
-        <span class="chev">›</span>
-      </button>
+      <div class="bubble-wrapper">
+        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-small">
+          <div>
+            <h3>Small Jobs</h3>
+            <small>Smaller works with fewer elements</small>
+          </div>
+          <span class="chev">›</span>
+        </button>
 
-      <div id="panel-small" class="panel" role="region" aria-labelledby="small">
-        <div class="jobs" role="listbox" aria-label="Small jobs">
-          <button class="job" role="option" data-img="images/lintel.png">
-            <strong>Lintel design</strong> – openings in walls
-          </button>
-          <button class="job" role="option" data-img="images/beam.png">
-            <strong>Single steel beam</strong> – simple support
-          </button>
-          <button class="job" role="option" data-img="images/wall-removal.png">
-            <strong>Wall removal</strong> – load path checks
-          </button>
-          <button class="job" role="option" data-img="images/chimney.png">
-            <strong>Chimney breast removal</strong> – safe support & checks
-          </button>
-        </div>
-        <div class="preview" aria-live="polite" aria-atomic="true">
-          <img src="images/lintel.png" alt="Example small job preview" />
+        <div id="panel-small" class="panel" role="region" aria-labelledby="small">
+          <div class="jobs" role="listbox" aria-label="Small jobs">
+            <button class="job" role="option" data-img="images/lintel.png">
+              <strong>Lintel design</strong> – openings in walls
+            </button>
+            <button class="job" role="option" data-img="images/beam.png">
+              <strong>Single steel beam</strong> – simple support
+            </button>
+            <button class="job" role="option" data-img="images/wall-removal.png">
+              <strong>Wall removal</strong> – load path checks
+            </button>
+            <button class="job" role="option" data-img="images/chimney.png">
+              <strong>Chimney breast removal</strong> – safe support & checks
+            </button>
+          </div>
+          <div class="preview" aria-live="polite" aria-atomic="true">
+            <div class="preview-placeholder">Select a small job to preview</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- COMPLEX JOBS -->
     <section class="section" id="complex">
-      <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-complex">
-        <div>
-          <h3>Complex Jobs</h3>
-          <small>Involved design packages</small>
-        </div>
-        <span class="chev">›</span>
-      </button>
+      <div class="bubble-wrapper">
+        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-complex">
+          <div>
+            <h3>Complex Jobs</h3>
+            <small>Involved design packages</small>
+          </div>
+          <span class="chev">›</span>
+        </button>
 
-      <div id="panel-complex" class="panel" role="region" aria-labelledby="complex">
-        <div class="jobs" role="listbox" aria-label="Complex jobs">
-          <button class="job" role="option" data-img="images/rear.png">
-            <strong>Rear extension</strong> – layout & beams
-          </button>
-          <button class="job" role="option" data-img="images/loft.png">
-            <strong>Loft conversion</strong> – new joists & supports
-          </button>
-          <button class="job" role="option" data-img="images/open.png">
-            <strong>Open-plan works</strong> – frames & bearings
-          </button>
-          <button class="job" role="option" data-img="images/side.png">
-            <strong>Side extension</strong> – coordination & checks
-          </button>
-        </div>
-        <div class="preview" aria-live="polite" aria-atomic="true">
-          <img src="images/rear.png" alt="Example complex job preview" />
-        </div>
+        <div id="panel-complex" class="panel" role="region" aria-labelledby="complex">
+          <div class="jobs" role="listbox" aria-label="Complex jobs">
+            <button class="job" role="option" data-img="images/rear.png">
+              <strong>Rear extension</strong> – layout & beams
+            </button>
+            <button class="job" role="option" data-img="images/loft.png">
+              <strong>Loft conversion</strong> – new joists & supports
+            </button>
+            <button class="job" role="option" data-img="images/open.png">
+              <strong>Open-plan works</strong> – frames & bearings
+            </button>
+            <button class="job" role="option" data-img="images/side.png">
+              <strong>Side extension</strong> – coordination & checks
+            </button>
+          </div>
+          <div class="preview" aria-live="polite" aria-atomic="true">
+            <div class="preview-placeholder">Select a complex job to preview</div>
+          </div>
 
-        <!-- CTA appears after first click -->
-        <div id="cta" class="cta-wrap" aria-live="polite">
-          <p>This list is not exhaustive – if you don't see your project type, please get in touch!</p>
-          <p><a class="btn" href="contact.html">Get in touch</a></p>
+          <!-- CTA appears after first click -->
+          <div id="cta" class="cta-wrap" aria-live="polite">
+            <p>This list is not exhaustive – if you don't see your project type, please get in touch!</p>
+            <p><a class="btn" href="contact.html">Get in touch</a></p>
+          </div>
         </div>
       </div>
     </section>
@@ -337,24 +358,22 @@
       let revealedCTA = false;
 
       allLists.forEach(list => {
-        const preview = list.parentElement.querySelector('.preview img');
+        const preview = list.parentElement.querySelector('.preview');
         const options = list.querySelectorAll('.job');
 
         options.forEach((opt, idx) => {
-          // Select first option by default
-          if (idx === 0) {
-            opt.setAttribute('aria-selected', 'true');
-          }
+          // Don't pre-select any option
+          opt.setAttribute('aria-selected', 'false');
 
           opt.addEventListener('click', () => {
             // Update selection
             options.forEach(o => o.setAttribute('aria-selected', 'false'));
             opt.setAttribute('aria-selected', 'true');
             
-            // Update preview image
+            // Update preview with image
             const src = opt.getAttribute('data-img');
             if (preview && src) {
-              preview.src = src;
+              preview.innerHTML = `<img src="${src}" alt="Selected job preview" />`;
             }
 
             // Reveal CTA after first interaction
