@@ -1,279 +1,321 @@
-/* Import Roboto Mono */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purebuild Consulting</title>
+    <style>
+        /* Import Roboto Mono */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
 
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Roboto Mono', monospace;
-    background: #f5f0e8;
-    color: #000;
-    line-height: 1.6;
-    position: relative;
-}
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background: #f5f0e8;
+            color: #000;
+            line-height: 1.6;
+            position: relative;
+        }
 
-/* Gradient Border on Left */
-body::before {
-    content: '';
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 12px;
-    background: linear-gradient(180deg, 
-        #ffc107 0%, 
-        #ff9800 25%, 
-        #ff5722 50%, 
-        #e91e63 75%,
-        #9c27b0 100%
-    );
-    z-index: 1000;
-}
+        /* Gradient Border on Left */
+        body::before {
+            content: '';
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            background: linear-gradient(180deg, 
+                #ffc107 0%, 
+                #ff9800 25%, 
+                #ff5722 50%, 
+                #e91e63 75%,
+                #9c27b0 100%
+            );
+            z-index: 1000;
+        }
 
-/* Hero Section */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 80px 40px 60px 40px;
-}
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 80px 40px 60px 40px;
+        }
 
-.hero-header {
-    text-align: center;
-    margin-bottom: 100px;
-}
+        .hero-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
 
-.logo-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-.hero-logo {
-    width: 50px;
-    height: 50px;
-}
+        .hero-logo {
+            width: 50px;
+            height: 50px;
+        }
 
-h1 {
-    font-size: 3rem;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-}
+        h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
 
-.tagline {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 60px;
-}
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 60px;
+        }
 
-/* CTA Buttons */
-.cta-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-.btn {
-    padding: 15px 40px;
-    font-size: 1rem;
-    font-family: 'Roboto Mono', monospace;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
+        .btn {
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-family: 'Roboto Mono', monospace;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
 
-.btn-primary {
-    background: #000;
-    color: #f5f0e8;
-    border: 3px solid #000;
-}
+        .btn-primary {
+            background: #000;
+            color: #f5f0e8;
+            border: 3px solid #000;
+        }
 
-.btn-primary:hover {
-    background: #333;
-    border-color: #333;
-    transform: translateY(-2px);
-}
+        .btn-primary:hover {
+            background: #333;
+            border-color: #333;
+            transform: translateY(-2px);
+        }
 
-.btn-secondary {
-    background: transparent;
-    color: #000;
-    border: 3px solid #000;
-}
+        .btn-secondary {
+            background: transparent;
+            color: #000;
+            border: 3px solid #000;
+        }
 
-.btn-secondary:hover {
-    background: #000;
-    color: #f5f0e8;
-    transform: translateY(-2px);
-}
+        .btn-secondary:hover {
+            background: #000;
+            color: #f5f0e8;
+            transform: translateY(-2px);
+        }
 
-/* Trust Stats */
-.trust-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    max-width: 1400px;
-    width: 100%;
-    padding: 0 40px;
-}
+        /* Trust Stats */
+        .trust-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            max-width: 1400px;
+            width: 100%;
+            padding: 0 40px;
+        }
 
-.stat-card {
-    background: #f5f0e8;
-    border: 3px solid #000;
-    border-radius: 30px;
-    padding: 80px 50px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .stat-card {
+            background: #f5f0e8;
+            border: 3px solid #000;
+            border-radius: 30px;
+            padding: 80px 50px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
 
-.stat-number {
-    font-size: 3.5rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-    line-height: 1;
-}
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
 
-.stat-label {
-    font-size: 1.1rem;
-    font-weight: 400;
-    line-height: 1.5;
-}
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .trust-stats {
-        gap: 40px;
-        padding: 0 30px;
-    }
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .trust-stats {
+                gap: 40px;
+                padding: 0 30px;
+            }
 
-    .stat-card {
-        padding: 60px 40px;
-    }
+            .stat-card {
+                padding: 60px 40px;
+            }
 
-    h1 {
-        font-size: 2.5rem;
-    }
+            h1 {
+                font-size: 2.5rem;
+            }
 
-    .stat-number {
-        font-size: 3rem;
-    }
-}
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
 
-@media (max-width: 900px) {
-    .trust-stats {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        max-width: 500px;
-    }
+        @media (max-width: 900px) {
+            .trust-stats {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 500px;
+            }
 
-    .hero {
-        padding: 60px 30px 50px 30px;
-    }
+            .hero {
+                padding: 60px 30px 50px 30px;
+            }
 
-    .hero-header {
-        margin-bottom: 80px;
-    }
-}
+            .hero-header {
+                margin-bottom: 80px;
+            }
+        }
 
-@media (max-width: 768px) {
-    body::before {
-        width: 8px;
-    }
+        @media (max-width: 768px) {
+            body::before {
+                width: 8px;
+            }
 
-    .hero {
-        padding: 50px 20px 40px 20px;
-    }
+            .hero {
+                padding: 50px 20px 40px 20px;
+            }
 
-    .hero-header {
-        margin-bottom: 60px;
-    }
+            .hero-header {
+                margin-bottom: 60px;
+            }
 
-    h1 {
-        font-size: 2rem;
-    }
+            h1 {
+                font-size: 2rem;
+            }
 
-    .tagline {
-        font-size: 1.2rem;
-        margin-bottom: 50px;
-    }
+            .tagline {
+                font-size: 1.2rem;
+                margin-bottom: 50px;
+            }
 
-    .hero-logo {
-        width: 40px;
-        height: 40px;
-    }
+            .hero-logo {
+                width: 40px;
+                height: 40px;
+            }
 
-    .cta-buttons {
-        gap: 15px;
-        width: 100%;
-    }
+            .cta-buttons {
+                gap: 15px;
+                width: 100%;
+            }
 
-    .btn {
-        padding: 14px 35px;
-        font-size: 0.95rem;
-    }
+            .btn {
+                padding: 14px 35px;
+                font-size: 0.95rem;
+            }
 
-    .trust-stats {
-        gap: 25px;
-        padding: 0 20px;
-    }
+            .trust-stats {
+                gap: 25px;
+                padding: 0 20px;
+            }
 
-    .stat-card {
-        padding: 50px 35px;
-        border-radius: 25px;
-    }
+            .stat-card {
+                padding: 50px 35px;
+                border-radius: 25px;
+            }
 
-    .stat-number {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
+            .stat-number {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
 
-    .stat-label {
-        font-size: 1rem;
-    }
-}
+            .stat-label {
+                font-size: 1rem;
+            }
+        }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.6rem;
-    }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
 
-    .logo-title {
-        flex-direction: column;
-        gap: 10px;
-    }
+            .logo-title {
+                flex-direction: column;
+                gap: 10px;
+            }
 
-    .tagline {
-        font-size: 1.1rem;
-    }
+            .tagline {
+                font-size: 1.1rem;
+            }
 
-    .cta-buttons {
-        flex-direction: column;
-    }
+            .cta-buttons {
+                flex-direction: column;
+            }
 
-    .btn {
-        width: 100%;
-    }
+            .btn {
+                width: 100%;
+            }
 
-    .stat-number {
-        font-size: 2.2rem;
-    }
+            .stat-number {
+                font-size: 2.2rem;
+            }
 
-    .stat-card {
-        padding: 40px 30px;
-    }
-}
+            .stat-card {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-header">
+            <div class="logo-title">
+                <img src="Logo.png" alt="Purebuild Logo" class="hero-logo">
+                <h1>Purebuild Consulting Ltd.</h1>
+            </div>
+            <p class="tagline">Structural engineering, done clearly.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">Get quote</a>
+                <a href="services.html" class="btn btn-secondary">Services</a>
+                <a href="about.html" class="btn btn-secondary">About</a>
+                <a href="faq.html" class="btn btn-secondary">FAQ</a>
+            </div>
+        </div>
+
+        <div class="trust-stats">
+            <div class="stat-card">
+                <div class="stat-number">5 Days</div>
+                <div class="stat-label">Average turnaround time for calcualtions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">£10M</div>
+                <div class="stat-label">Professional indemnity cover (never used)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Building control approval</div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
