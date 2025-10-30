@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Roboto Mono', monospace;
-            background: #f5f0e8;
+            background: #fff8e5;
             color: #000;
             line-height: 1.6;
             position: relative;
@@ -41,14 +41,73 @@
             z-index: 1000;
         }
 
+        /* Header Navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #fff8e5;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .brand-logo {
+            width: 30px;
+            height: 30px;
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 0.95rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-cta {
+            background: #000;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 2px solid #000;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: #333;
+            border-color: #333;
+            opacity: 1;
+        }
+
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 70px);
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding: 80px 40px 60px 40px;
+            padding: 60px 40px 60px 40px;
         }
 
         .hero-header {
@@ -71,7 +130,7 @@
 
         h1 {
             font-size: 3rem;
-            font-weight: 400;
+            font-weight: 700;
             letter-spacing: -0.02em;
         }
 
@@ -102,7 +161,7 @@
 
         .btn-primary {
             background: #000;
-            color: #f5f0e8;
+            color: #fff;
             border: 3px solid #000;
         }
 
@@ -120,7 +179,7 @@
 
         .btn-secondary:hover {
             background: #000;
-            color: #f5f0e8;
+            color: #fff;
             transform: translateY(-2px);
         }
 
@@ -135,7 +194,7 @@
         }
 
         .stat-card {
-            background: #f5f0e8;
+            background: #fff8e5;
             border: 3px solid #000;
             border-radius: 30px;
             padding: 80px 50px;
@@ -182,6 +241,14 @@
         }
 
         @media (max-width: 900px) {
+            .nav {
+                gap: 20px;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
             .trust-stats {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -200,6 +267,14 @@
         @media (max-width: 768px) {
             body::before {
                 width: 8px;
+            }
+
+            .header {
+                padding: 15px 20px;
+            }
+
+            .nav {
+                display: none;
             }
 
             .hero {
@@ -287,6 +362,20 @@
     </style>
 </head>
 <body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="index.html" class="brand">
+            <img src="Logo.png" alt="Purebuild Logo" class="brand-logo">
+            <span class="brand-name">Purebuild</span>
+        </a>
+        <nav class="nav">
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+            <a href="contact.html" class="nav-cta">Contact</a>
+        </nav>
+    </header>
+
     <section class="hero">
         <div class="hero-header">
             <div class="logo-title">
