@@ -26,19 +26,52 @@
       overflow-x: hidden;
     }
 
-    /* Color blocks on left side */
+    /* Color blocks on left side with animations */
     .color-block {
       position: fixed;
       left: 0;
       width: 12px;
       height: 25%;
       z-index: 1000;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: center;
     }
 
-    .color-block-1 { top: 0; background: #ffb200; }
-    .color-block-2 { top: 25%; background: #eb5b00; }
-    .color-block-3 { top: 50%; background: #e4003a; }
-    .color-block-4 { top: 75%; background: #b60071; }
+    .color-block-1 { 
+      top: 0; 
+      background: #ffb200;
+      animation: blockAppear 0.3s ease-out 0s forwards;
+    }
+    
+    .color-block-2 { 
+      top: 25%; 
+      background: #eb5b00;
+      animation: blockAppear 0.3s ease-out 0.3s forwards;
+    }
+    
+    .color-block-3 { 
+      top: 50%; 
+      background: #e4003a;
+      animation: blockAppear 0.3s ease-out 0.3s forwards;
+    }
+    
+    .color-block-4 { 
+      top: 75%; 
+      background: #b60071;
+      animation: blockAppear 0.3s ease-out 0s forwards;
+    }
+
+    @keyframes blockAppear {
+      from {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
 
     /* Header Navigation */
     .header {
@@ -147,7 +180,7 @@
       margin: 32px 0 8px;
       text-transform: uppercase;
       opacity: 0;
-      animation: fadeIn 0.8s ease-out 0.2s forwards;
+      animation: fadeIn 0.8s ease-out 0.8s forwards;
     }
     
     .page-sub {
@@ -156,7 +189,7 @@
       margin-bottom: 32px;
       font-size: 14px;
       opacity: 0;
-      animation: fadeIn 0.8s ease-out 0.4s forwards;
+      animation: fadeIn 0.8s ease-out 1s forwards;
     }
 
     /* Fade-in animation */
@@ -174,22 +207,22 @@
     /* Staggered fade-in for sections */
     #how-it-works-section {
       opacity: 0;
-      animation: fadeIn 0.8s ease-out 0.6s forwards;
+      animation: fadeIn 0.8s ease-out 1.2s forwards;
     }
 
     #single-section {
       opacity: 0;
-      animation: fadeIn 0.8s ease-out 0.9s forwards;
+      animation: fadeIn 0.8s ease-out 1.5s forwards;
     }
 
     #packages-section {
       opacity: 0;
-      animation: fadeIn 0.8s ease-out 1.2s forwards;
+      animation: fadeIn 0.8s ease-out 1.8s forwards;
     }
 
     .testimonials {
       opacity: 0;
-      animation: fadeIn 0.8s ease-out 1.5s forwards;
+      animation: fadeIn 0.8s ease-out 2.1s forwards;
     }
 
     /* Section containers */
@@ -198,19 +231,25 @@
       margin: 0 auto 18px;
     }
 
-    /* Full bubble wrapper */
+    /* Full bubble wrapper - narrower initially, expands when opened */
     .bubble-wrapper {
       width: 100%;
-      background: #fff8e5;
+      max-width: 520px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.5);
       border: 2px solid #111;
       border-radius: 22px;
       box-shadow: 0 10px 25px rgba(0,0,0,.08);
-      transition: box-shadow .15s ease;
+      transition: all .3s ease;
       overflow: hidden;
     }
     
     .bubble-wrapper:hover {
       box-shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+
+    .bubble-wrapper.open {
+      max-width: 760px;
     }
 
     /* Accordion bubble buttons */
@@ -242,7 +281,7 @@
 
     .bubble h2 {
       margin: 0;
-      font-size: 24px;
+      font-size: 28px;
       letter-spacing: .08em;
       text-transform: uppercase;
       font-weight: 700;
@@ -284,6 +323,12 @@
     .panel.open {
       padding: 6px 22px 22px;
       opacity: 1;
+      max-height: 600px;
+    }
+    
+    /* Specific max-height for jobs panels with more content */
+    #panel-single.open,
+    #panel-packages.open {
       max-height: 2000px;
     }
 
@@ -490,7 +535,7 @@
       max-width: 760px;
       margin: 50px auto 0;
       padding: 32px 28px;
-      background: #fff8e5;
+      background: rgba(255, 255, 255, 0.5);
       border: 2px solid #111;
       border-radius: 22px;
     }
@@ -601,6 +646,14 @@
         font-size: 24px;
       }
 
+      .bubble-wrapper {
+        max-width: 100%;
+      }
+
+      .bubble-wrapper.open {
+        max-width: 100%;
+      }
+
       .process-steps {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -611,7 +664,7 @@
       }
 
       .bubble h2 {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       .bubble {
@@ -672,7 +725,7 @@
 
     <!-- HOW IT WORKS - Expandable bubble with animated content -->
     <section class="section" id="how-it-works-section">
-      <div class="bubble-wrapper">
+      <div class="bubble-wrapper" id="how-it-works-wrapper">
         <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-how-it-works">
           <div>
             <h2>How It Works</h2>
@@ -711,9 +764,9 @@
       </div>
     </section>
 
-    <!-- SINGLE ELEMENTS (formerly Small Jobs) -->
+    <!-- SINGLE ELEMENTS -->
     <section class="section" id="single-section">
-      <div class="bubble-wrapper">
+      <div class="bubble-wrapper" id="single-wrapper">
         <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-single">
           <div>
             <h3>Single Elements</h3>
@@ -793,9 +846,9 @@
       </div>
     </section>
 
-    <!-- FULL PACKAGES (formerly Complex Jobs) -->
+    <!-- FULL PACKAGES -->
     <section class="section" id="packages-section">
-      <div class="bubble-wrapper">
+      <div class="bubble-wrapper" id="packages-wrapper">
         <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-packages">
           <div>
             <h3>Full Packages</h3>
@@ -892,7 +945,7 @@
       </p>
     </div>
 
-    <!-- Testimonials - minimal, builds trust -->
+    <!-- Testimonials -->
     <div class="testimonials">
       <h2>What Clients Say</h2>
       
@@ -948,44 +1001,57 @@
       });
     }
 
-    // Accordion functionality with special animation for How It Works
+    // Accordion functionality
     (function() {
       const sections = [
-        {btn: document.querySelector('#how-it-works-section .bubble'), panel: document.getElementById('panel-how-it-works'), isHowItWorks: true},
-        {btn: document.querySelector('#single-section .bubble'), panel: document.getElementById('panel-single')},
-        {btn: document.querySelector('#packages-section .bubble'), panel: document.getElementById('panel-packages')}
+        {
+          btn: document.querySelector('#how-it-works-section .bubble'), 
+          panel: document.getElementById('panel-how-it-works'),
+          wrapper: document.getElementById('how-it-works-wrapper'),
+          isHowItWorks: true
+        },
+        {
+          btn: document.querySelector('#single-section .bubble'), 
+          panel: document.getElementById('panel-single'),
+          wrapper: document.getElementById('single-wrapper')
+        },
+        {
+          btn: document.querySelector('#packages-section .bubble'), 
+          panel: document.getElementById('panel-packages'),
+          wrapper: document.getElementById('packages-wrapper')
+        }
       ];
 
-      sections.forEach(({btn, panel, isHowItWorks}) => {
+      sections.forEach(({btn, panel, wrapper, isHowItWorks}) => {
         if (!btn || !panel) return;
 
         btn.addEventListener('click', () => {
           const isOpen = panel.classList.contains('open');
           
-          // Close all panels
-          sections.forEach(({panel: p, btn: b}) => {
+          // Close all panels and wrappers
+          sections.forEach(({panel: p, btn: b, wrapper: w}) => {
             p.classList.remove('open');
             b.setAttribute('aria-expanded', 'false');
+            if (w) w.classList.remove('open');
           });
           
           // Open clicked panel if it was closed
           if (!isOpen) {
             panel.classList.add('open');
             btn.setAttribute('aria-expanded', 'true');
+            if (wrapper) wrapper.classList.add('open');
             
             // Special animation for How It Works
             if (isHowItWorks) {
               const steps = panel.querySelectorAll('.process-step');
               const timeline = panel.querySelector('.process-timeline');
               
-              // Animate steps
-              steps.forEach((step, index) => {
+              steps.forEach((step) => {
                 setTimeout(() => {
                   step.classList.add('animate');
                 }, 50);
               });
               
-              // Animate timeline after steps
               if (timeline) {
                 setTimeout(() => {
                   timeline.classList.add('animate');
@@ -998,7 +1064,7 @@
               panel.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }, 50);
           } else {
-            // Remove animation classes when closing How It Works
+            // Remove animation classes when closing
             if (isHowItWorks) {
               const steps = panel.querySelectorAll('.process-step');
               const timeline = panel.querySelector('.process-timeline');
@@ -1010,7 +1076,7 @@
       });
     })();
 
-    // Job selection - expands to show details inline
+    // Job selection
     (function() {
       const allLists = document.querySelectorAll('.jobs');
       let revealedCTA = false;
@@ -1019,22 +1085,18 @@
         const preview = list.parentElement.querySelector('.preview');
         const options = list.querySelectorAll('.job');
 
-        options.forEach((opt, idx) => {
+        options.forEach((opt) => {
           opt.setAttribute('aria-selected', 'false');
 
           opt.addEventListener('click', () => {
-            // Toggle selection
             const wasSelected = opt.getAttribute('aria-selected') === 'true';
             
-            // Deselect all in this list
             options.forEach(o => o.setAttribute('aria-selected', 'false'));
             
-            // Select this one if it wasn't already selected
             if (!wasSelected) {
               opt.setAttribute('aria-selected', 'true');
             }
             
-            // Update preview with image
             const src = opt.getAttribute('data-img');
             if (preview && src && !wasSelected) {
               preview.innerHTML = `<img src="${src}" alt="Selected service illustration" />`;
@@ -1042,7 +1104,6 @@
               preview.innerHTML = `<div class="preview-placeholder">Click a service to see what's included</div>`;
             }
 
-            // Reveal CTA after first interaction
             if (!revealedCTA) {
               const cta = document.getElementById('cta');
               if (cta) {
