@@ -3,39 +3,445 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About — Purebuild Consulting</title>
-  <meta name="description" content="About Purebuild Consulting — residential structural engineering in London." />
-  <link rel="stylesheet" href="styles.css?v=rev8" />
+  <title>About • Purebuild Consulting</title>
+  <meta name="description" content="About Purebuild Consulting – residential structural engineering in London." />
+  
+  <style>
+    /* Import Roboto Mono */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+    /* Animations */
+    @keyframes blockAppear {
+      from {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animation timing classes */
+    .header {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.0s forwards;
+    }
+
+    .page-title {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.3s forwards;
+    }
+
+    .intro-text {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.6s forwards;
+    }
+
+    .content-section:nth-of-type(1) {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.9s forwards;
+    }
+
+    .content-section:nth-of-type(2) {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 2.5s forwards;
+    }
+
+    .content-section:nth-of-type(3) {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 2.2s forwards;
+    }
+
+    .cta-section {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 2.8s forwards;
+    }
+
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto Mono', monospace;
+      background: #fff8e5;
+      color: #000;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Color blocks on left side */
+    .color-block {
+      position: fixed;
+      left: 0;
+      width: 12px;
+      height: 25%;
+      z-index: 1000;
+      opacity: 0;
+    }
+
+    .color-block-1 {
+      top: 0;
+      background: #ffb200;
+      animation: blockAppear 0.3s ease-out 0s forwards;
+    }
+
+    .color-block-2 {
+      top: 25%;
+      background: #eb5b00;
+      animation: blockAppear 0.3s ease-out 0.3s forwards;
+    }
+
+    .color-block-3 {
+      top: 50%;
+      background: #e4003a;
+      animation: blockAppear 0.3s ease-out 0.3s forwards;
+    }
+
+    .color-block-4 {
+      top: 75%;
+      background: #b60071;
+      animation: blockAppear 0.3s ease-out 0s forwards;
+    }
+
+    /* Header Navigation */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #fff8e5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+    }
+
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #000;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-link:hover {
+      opacity: 0.7;
+    }
+
+    .nav-cta {
+      background: #000;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 50px;
+      border: 2px solid #000;
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: #333;
+      border-color: #333;
+      opacity: 1;
+    }
+
+    /* Main Content */
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+
+    .page-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-text {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 60px;
+      text-align: center;
+      color: #333;
+    }
+
+    .content-section {
+      background: #fff8e5;
+      border: 3px solid #000;
+      border-radius: 30px;
+      padding: 50px;
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-section h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      letter-spacing: -0.01em;
+    }
+
+    .content-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .content-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .list li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .list li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #000;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .btn {
+      padding: 18px 50px;
+      font-size: 1.1rem;
+      font-family: 'Roboto Mono', monospace;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      border: 3px solid #000;
+    }
+
+    .btn:hover {
+      background: #333;
+      border-color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Footer */
+    .site-foot {
+      text-align: center;
+      padding: 30px 20px;
+      background: #fff8e5;
+      font-size: 0.9rem;
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .site-foot a {
+      color: #000;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .site-foot a:hover {
+      opacity: 0.7;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .nav {
+        gap: 20px;
+      }
+
+      .nav-link {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .color-block {
+        width: 8px;
+      }
+
+      .header {
+        padding: 15px 20px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .page {
+        padding: 40px 20px 80px;
+      }
+
+      .page-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+
+      .intro-text {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+      }
+
+      .content-section {
+        padding: 35px 25px;
+        border-radius: 25px;
+      }
+
+      .content-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+
+      .content-section p,
+      .list li {
+        font-size: 1rem;
+      }
+
+      .btn {
+        padding: 15px 40px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 1.6rem;
+      }
+
+      .intro-text {
+        font-size: 1rem;
+      }
+
+      .content-section {
+        padding: 30px 20px;
+      }
+
+      .content-section h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 
-<body class="inner">
-  <header class="topnav">
-    <a class="brand" href="index.html"><img src="Logo.png" class="logo" alt="" /><span>Purebuild</span></a>
-    <nav>
-      <a class="navlink" href="services.html">Services</a>
-      <a class="navlink" href="faq.html">FAQ</a>
-      <a class="btn nav-cta" href="contact.html">Contact</a>
+<body>
+  <!-- Color blocks on left side -->
+  <div class="color-block color-block-1"></div>
+  <div class="color-block color-block-2"></div>
+  <div class="color-block color-block-3"></div>
+  <div class="color-block color-block-4"></div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <a href="index.html" class="brand">
+      <img src="Logo.png" alt="Purebuild Logo" class="brand-logo">
+      <span class="brand-name">Purebuild</span>
+    </a>
+    <nav class="nav">
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
     </nav>
   </header>
 
   <main class="page">
-    <h1>About</h1>
-    <p>Purebuild Consulting is an independent structural engineering practice focused on small residential projects in London — extensions, lofts, openings in load-bearing walls, garden rooms, and remedial works.</p>
-    <p>My approach is straightforward: explain options clearly, design efficiently, and deliver documentation that homeowners and builders actually understand.</p>
+    <h1 class="page-title">About Purebuild</h1>
+    
+    <p class="intro-text">
+      Independent structural engineering for residential projects in London. Clear communication, efficient design, practical solutions.
+    </p>
 
-    <h2>Why choose a structural engineer?</h2>
-    <ul class="list">
-      <li>Ensure safety and compliance with Building Regulations.</li>
-      <li>Right-sized solutions (no over-specifying steel).</li>
-      <li>Clear calculations and sketches your builder can use.</li>
-    </ul>
+    <div class="content-section">
+      <h2>What we do</h2>
+      <p>Purebuild Consulting specializes in small to medium residential projects across London – extensions, loft conversions, structural openings, garden rooms, and remedial works.</p>
+      <p>We focus on homeowner projects where clear communication and practical solutions matter most. No corporate overhead, no unnecessary complexity.</p>
+    </div>
 
-    <p><a class="btn" href="contact.html#quote">Get a quote</a></p>
+    <div class="content-section">
+      <h2>How we work</h2>
+      <p>Our approach is straightforward: understand your project, explain your options clearly, design efficiently, and deliver documentation that both you and your builder can actually use.</p>
+      <p>You'll get calculations that satisfy Building Control, sketches that make sense, and direct access to an engineer who knows your project.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Why use a structural engineer?</h2>
+      <ul class="list">
+        <li>Safety and Building Regulations compliance from the start</li>
+        <li>Right-sized solutions – no over-specifying, no unnecessary cost</li>
+        <li>Clear calculations and construction details your builder can work from</li>
+        <li>Peace of mind that your home's structure is properly designed</li>
+        <li>Professional indemnity insurance for your protection</li>
+      </ul>
+    </div>
+
+    <div class="cta-section">
+      <a class="btn" href="contact.html">Get a quote</a>
+    </div>
   </main>
 
   <footer class="site-foot">
     <p>© <span id="year"></span> Purebuild Consulting Ltd • <a href="privacy.html">Privacy & Legal</a></p>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
