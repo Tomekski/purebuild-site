@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Design Services • Purebuild Consulting</title>
-  <meta name="description" content="Clear, practical structural engineering services for home projects in London – small jobs and complex packages." />
+  <meta name="description" content="Clear, practical structural engineering services for home projects in London – single elements and full packages." />
   
   <style>
     /* Import Roboto Mono */
@@ -35,25 +35,10 @@
       z-index: 1000;
     }
 
-    .color-block-1 {
-      top: 0;
-      background: #ffb200;
-    }
-
-    .color-block-2 {
-      top: 25%;
-      background: #eb5b00;
-    }
-
-    .color-block-3 {
-      top: 50%;
-      background: #e4003a;
-    }
-
-    .color-block-4 {
-      top: 75%;
-      background: #b60071;
-    }
+    .color-block-1 { top: 0; background: #ffb200; }
+    .color-block-2 { top: 25%; background: #eb5b00; }
+    .color-block-3 { top: 50%; background: #e4003a; }
+    .color-block-4 { top: 75%; background: #b60071; }
 
     /* Header Navigation */
     .header {
@@ -62,6 +47,8 @@
       align-items: center;
       padding: 20px 40px;
       background: #fff8e5;
+      position: relative;
+      z-index: 100;
     }
 
     .brand {
@@ -114,6 +101,36 @@
       opacity: 1;
     }
 
+    /* Mobile menu toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: #000;
+      color: #fff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff8e5;
+      border-bottom: 2px solid #000;
+      padding: 20px;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
     /* Main content */
     .page {
       padding: 40px 40px 80px;
@@ -121,7 +138,7 @@
       margin: 0 auto;
     }
 
-    /* Page title styling */
+    /* Page title styling with fade-in animation */
     .page-title {
       text-align: center;
       font-weight: 700;
@@ -129,13 +146,50 @@
       font-size: clamp(28px, 4.2vw, 48px);
       margin: 32px 0 8px;
       text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 0.2s forwards;
     }
     
     .page-sub {
       text-align: center;
       color: rgba(0,0,0,.65);
-      margin-bottom: 28px;
+      margin-bottom: 32px;
       font-size: 14px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 0.4s forwards;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Staggered fade-in for sections */
+    #how-it-works-section {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 0.6s forwards;
+    }
+
+    #single-section {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 0.9s forwards;
+    }
+
+    #packages-section {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.2s forwards;
+    }
+
+    .testimonials {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 1.5s forwards;
     }
 
     /* Section containers */
@@ -144,7 +198,7 @@
       margin: 0 auto 18px;
     }
 
-    /* Full bubble wrapper - includes button and expandable content */
+    /* Full bubble wrapper */
     .bubble-wrapper {
       width: 100%;
       background: #fff8e5;
@@ -185,6 +239,15 @@
       font-weight: 700;
       font-family: 'Roboto Mono', monospace;
     }
+
+    .bubble h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-family: 'Roboto Mono', monospace;
+    }
     
     .bubble small {
       display: block;
@@ -210,7 +273,7 @@
       transform: rotate(90deg);
     }
 
-    /* Panel content - accordion (inside bubble) */
+    /* Panel content */
     .panel {
       max-height: 0;
       overflow: hidden;
@@ -221,7 +284,74 @@
     .panel.open {
       padding: 6px 22px 22px;
       opacity: 1;
-      max-height: 1400px;
+      max-height: 2000px;
+    }
+
+    /* How It Works - special styling */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .process-step {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .process-step.animate {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .process-step:nth-child(1).animate {
+      animation-delay: 0.1s;
+    }
+
+    .process-step:nth-child(2).animate {
+      animation-delay: 0.3s;
+    }
+
+    .process-step:nth-child(3).animate {
+      animation-delay: 0.5s;
+    }
+
+    .process-step:nth-child(4).animate {
+      animation-delay: 0.7s;
+    }
+
+    .process-step-num {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #000;
+      color: #fff;
+      line-height: 32px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .process-step-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .process-timeline {
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,.1);
+      font-size: 12px;
+      color: rgba(0,0,0,.6);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .process-timeline.animate {
+      animation: fadeIn 0.5s ease-out 0.9s forwards;
     }
 
     /* Job list items */
@@ -232,50 +362,83 @@
     }
     
     .job {
-      text-align: center;
+      text-align: left;
       border: 2px solid #111;
-      border-radius: 999px;
-      padding: 14px 18px;
+      border-radius: 22px;
+      padding: 16px 20px;
       background: rgba(255,255,255,.9);
       cursor: pointer;
       transition: all .15s ease;
       font-family: 'Roboto Mono', monospace;
-      font-size: 15px;
+      font-size: 14px;
       outline: 3px solid transparent;
       outline-offset: 0;
     }
+
+    .job-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .job-desc {
+      color: rgba(0,0,0,.65);
+      font-size: 13px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .job-details {
+      font-size: 11px;
+      color: rgba(0,0,0,.5);
+      display: none;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(0,0,0,.1);
+      line-height: 1.5;
+    }
+
+    .job-details ul {
+      margin: 6px 0;
+      padding-left: 16px;
+    }
+
+    .job-details li {
+      margin: 2px 0;
+    }
     
-    /* Hover states with colored rings matching gradient scheme */
-    #small .job:hover {
+    /* Hover states with colored rings */
+    #single-section .job:hover {
       outline-color: #ffb200;
       box-shadow: 0 4px 12px rgba(255, 178, 0, 0.2);
     }
     
-    #complex .job:hover {
+    #packages-section .job:hover {
       outline-color: #eb5b00;
       box-shadow: 0 4px 12px rgba(235, 91, 0, 0.2);
     }
     
-    .job strong {
-      font-weight: 700;
-    }
-    
-    /* Selected state */
+    /* Selected state - expands to show details */
     .job[aria-selected="true"] {
       outline-color: #e4003a;
       outline-width: 3px;
       background: #fffdf5;
     }
+
+    .job[aria-selected="true"] .job-details {
+      display: block;
+    }
     
-    #small .job[aria-selected="true"]:hover {
+    #single-section .job[aria-selected="true"]:hover {
       outline-color: #ffb200;
     }
     
-    #complex .job[aria-selected="true"]:hover {
+    #packages-section .job[aria-selected="true"]:hover {
       outline-color: #eb5b00;
     }
 
-    /* Image preview - stacks below jobs */
+    /* Image preview */
     .preview {
       margin-top: 6px;
       display: grid;
@@ -303,7 +466,7 @@
       font-family: 'Roboto Mono', monospace;
     }
 
-    /* CTA section - now outside bubbles */
+    /* CTA section */
     .cta-wrap {
       text-align: center;
       margin-top: 22px;
@@ -319,6 +482,49 @@
     
     .cta-wrap p {
       margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    /* Testimonials - minimal and clean */
+    .testimonials {
+      max-width: 760px;
+      margin: 50px auto 0;
+      padding: 32px 28px;
+      background: #fff8e5;
+      border: 2px solid #111;
+      border-radius: 22px;
+    }
+
+    .testimonials h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: .05em;
+    }
+
+    .testimonial {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .testimonial:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .testimonial-text {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: 12px;
+      color: rgba(0,0,0,.6);
     }
 
     .btn {
@@ -341,6 +547,17 @@
       transform: translateY(-2px);
     }
 
+    .btn-secondary {
+      background: transparent;
+      color: #000;
+      margin-left: 10px;
+    }
+
+    .btn-secondary:hover {
+      background: #000;
+      color: #fff;
+    }
+
     /* Footer */
     .site-foot {
       text-align: center;
@@ -358,19 +575,6 @@
       text-decoration: underline;
     }
 
-    /* Accessibility */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-
     /* Responsive Design */
     @media (max-width: 768px) {
       .color-block {
@@ -385,6 +589,10 @@
         display: none;
       }
 
+      .mobile-menu-toggle {
+        display: block;
+      }
+
       .page {
         padding: 30px 20px 60px;
       }
@@ -393,8 +601,17 @@
         font-size: 24px;
       }
 
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
       .bubble h3 {
         font-size: 22px;
+      }
+
+      .bubble h2 {
+        font-size: 20px;
       }
 
       .bubble {
@@ -406,8 +623,16 @@
       }
 
       .job {
+        font-size: 13px;
+        padding: 14px 16px;
+      }
+
+      .job-title {
         font-size: 14px;
-        padding: 12px 16px;
+      }
+
+      .testimonials {
+        padding: 24px 20px;
       }
     }
   </style>
@@ -425,7 +650,14 @@
       <img src="Logo.png" alt="Purebuild Logo" class="brand-logo">
       <span class="brand-name">Purebuild</span>
     </a>
-    <nav class="nav">
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+    <nav class="nav" id="mainNav">
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </nav>
+    <nav class="mobile-nav" id="mobileNav">
       <a href="about.html" class="nav-link">About</a>
       <a href="services.html" class="nav-link">Services</a>
       <a href="faq.html" class="nav-link">FAQ</a>
@@ -436,79 +668,262 @@
   <!-- Main content -->
   <main class="page">
     <h1 class="page-title">Design Services</h1>
-    <p class="page-sub">Clear, practical engineering for home projects. Click a section to expand.</p>
+    <p class="page-sub">Clear, practical engineering for home projects</p>
 
-    <!-- SMALL JOBS -->
-    <section class="section" id="small">
+    <!-- HOW IT WORKS - Expandable bubble with animated content -->
+    <section class="section" id="how-it-works-section">
       <div class="bubble-wrapper">
-        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-small">
+        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-how-it-works">
           <div>
-            <h3>Small Jobs</h3>
-            <small>Smaller works with fewer elements</small>
+            <h2>How It Works</h2>
+            <small>Our simple 4-step process</small>
           </div>
           <span class="chev">›</span>
         </button>
 
-        <div id="panel-small" class="panel" role="region" aria-labelledby="small">
-          <div class="jobs" role="listbox" aria-label="Small jobs">
+        <div id="panel-how-it-works" class="panel" role="region" aria-labelledby="how-it-works">
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="process-step-num">1</div>
+              <div class="process-step-title">Consult</div>
+              <div>Discuss your project (15-min call)</div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">2</div>
+              <div class="process-step-title">Assess</div>
+              <div>Review plans or site visit</div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">3</div>
+              <div class="process-step-title">Design</div>
+              <div>Prepare calculations & drawings</div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">4</div>
+              <div class="process-step-title">Deliver</div>
+              <div>Building control ready pack</div>
+            </div>
+          </div>
+          <div class="process-timeline">
+            Average turnaround: 5 working days • Rush service available
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SINGLE ELEMENTS (formerly Small Jobs) -->
+    <section class="section" id="single-section">
+      <div class="bubble-wrapper">
+        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-single">
+          <div>
+            <h3>Single Elements</h3>
+            <small>Individual structural calculations</small>
+          </div>
+          <span class="chev">›</span>
+        </button>
+
+        <div id="panel-single" class="panel" role="region" aria-labelledby="single">
+          <div class="jobs" role="listbox" aria-label="Single element services">
+            
             <button class="job" role="option" data-img="lintel.png">
-              <strong>Lintel design</strong> – openings in walls
+              <span class="job-title">Lintel Design</span>
+              <span class="job-desc">For new or enlarged openings in load-bearing walls</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Structural calculations (BS5950/Eurocodes)</li>
+                  <li>Lintel specification & sizing</li>
+                  <li>Installation drawing</li>
+                  <li>Building control calculation pack</li>
+                </ul>
+                <strong>Timeline:</strong> 3-5 working days
+              </div>
             </button>
+
             <button class="job" role="option" data-img="beam.png">
-              <strong>Single steel beam</strong> – simple support
+              <span class="job-title">Single Steel Beam</span>
+              <span class="job-desc">Supporting structure above openings</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Load path analysis</li>
+                  <li>Beam size specification (readily available sections)</li>
+                  <li>Support detail drawings</li>
+                  <li>Building control documentation</li>
+                </ul>
+                <strong>Timeline:</strong> 3-5 working days
+              </div>
             </button>
+
             <button class="job" role="option" data-img="wall-removal.png">
-              <strong>Wall removal</strong> – load path checks
+              <span class="job-title">Wall Removal</span>
+              <span class="job-desc">Load assessment & support design for removing walls</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Load-bearing wall assessment</li>
+                  <li>Alternative support design (beam/frame)</li>
+                  <li>Construction drawings</li>
+                  <li>Temporary works guidance</li>
+                </ul>
+                <strong>Timeline:</strong> 4-6 working days
+              </div>
             </button>
+
             <button class="job" role="option" data-img="chimney.png">
-              <strong>Chimney breast removal</strong> – safe support & checks
+              <span class="job-title">Chimney Breast Removal</span>
+              <span class="job-desc">Safe removal with proper load transfer</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Load distribution analysis</li>
+                  <li>Support beam design</li>
+                  <li>Installation sequence</li>
+                  <li>Party wall considerations (if applicable)</li>
+                </ul>
+                <strong>Timeline:</strong> 4-6 working days
+              </div>
             </button>
+
           </div>
           <div class="preview" aria-live="polite" aria-atomic="true">
-            <div class="preview-placeholder">Select a small job to preview</div>
+            <div class="preview-placeholder">Click a service to see what's included</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COMPLEX JOBS -->
-    <section class="section" id="complex">
+    <!-- FULL PACKAGES (formerly Complex Jobs) -->
+    <section class="section" id="packages-section">
       <div class="bubble-wrapper">
-        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-complex">
+        <button class="bubble" type="button" aria-expanded="false" aria-controls="panel-packages">
           <div>
-            <h3>Complex Jobs</h3>
-            <small>Involved design packages</small>
+            <h3>Full Packages</h3>
+            <small>Complete structural design services</small>
           </div>
           <span class="chev">›</span>
         </button>
 
-        <div id="panel-complex" class="panel" role="region" aria-labelledby="complex">
-          <div class="jobs" role="listbox" aria-label="Complex jobs">
+        <div id="panel-packages" class="panel" role="region" aria-labelledby="packages">
+          <div class="jobs" role="listbox" aria-label="Full package services">
+            
             <button class="job" role="option" data-img="rear.png">
-              <strong>Rear extension</strong> – layout & beams
+              <span class="job-title">Rear Extension</span>
+              <span class="job-desc">Full structural package for rear extensions</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Foundation design</li>
+                  <li>All beam & lintel specifications</li>
+                  <li>Floor structure design</li>
+                  <li>Roof structure calculations</li>
+                  <li>Full construction drawing set</li>
+                  <li>Building control submission pack</li>
+                </ul>
+                <strong>Timeline:</strong> 5-7 working days
+              </div>
             </button>
+
             <button class="job" role="option" data-img="loft.png">
-              <strong>Loft conversion</strong> – new joists & supports
+              <span class="job-title">Loft Conversion</span>
+              <span class="job-desc">Complete design for new habitable space</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>New floor joist design & sizing</li>
+                  <li>Steel beam specifications for openings</li>
+                  <li>Dormer structural details (if applicable)</li>
+                  <li>Staircase opening design</li>
+                  <li>Party wall calculations (if needed)</li>
+                  <li>Full structural drawing package</li>
+                </ul>
+                <strong>Timeline:</strong> 6-8 working days
+              </div>
             </button>
+
             <button class="job" role="option" data-img="open.png">
-              <strong>Open-plan works</strong> – frames & bearings
+              <span class="job-title">Open-Plan Reconfiguration</span>
+              <span class="job-desc">Structural design for removing multiple walls</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Load path analysis for entire floor</li>
+                  <li>Steel frame or beam design</li>
+                  <li>Support bearing calculations</li>
+                  <li>Foundation assessment</li>
+                  <li>Coordinated structural drawings</li>
+                  <li>Building control documentation</li>
+                </ul>
+                <strong>Timeline:</strong> 5-7 working days
+              </div>
             </button>
+
             <button class="job" role="option" data-img="side.png">
-              <strong>Side extension</strong> – coordination & checks
+              <span class="job-title">Side Extension</span>
+              <span class="job-desc">Coordinated structural package for side returns</span>
+              <div class="job-details">
+                <strong>What's Included:</strong>
+                <ul>
+                  <li>Foundation design</li>
+                  <li>Wall tie specifications</li>
+                  <li>Beam & lintel design</li>
+                  <li>Roof connection details</li>
+                  <li>Full construction drawings</li>
+                  <li>Building control submission</li>
+                </ul>
+                <strong>Timeline:</strong> 5-7 working days
+              </div>
             </button>
+
           </div>
           <div class="preview" aria-live="polite" aria-atomic="true">
-            <div class="preview-placeholder">Select a complex job to preview</div>
+            <div class="preview-placeholder">Click a service to see what's included</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA appears after first click - now outside bubbles -->
+    <!-- CTA - appears after interaction -->
     <div id="cta" class="cta-wrap" aria-live="polite">
       <p>This list is not exhaustive – if you don't see your project type, please get in touch!</p>
-      <p><a class="btn" href="contact.html">Get in touch</a></p>
+      <p>
+        <a class="btn" href="contact.html">Request Quote</a>
+        <a class="btn btn-secondary" href="faq.html">View FAQ</a>
+      </p>
     </div>
+
+    <!-- Testimonials - minimal, builds trust -->
+    <div class="testimonials">
+      <h2>What Clients Say</h2>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">
+          "Clear calculations, quick turnaround, building control approved first time. Exactly what we needed for our kitchen extension."
+        </div>
+        <div class="testimonial-author">
+          — David M., Homeowner (Rear Extension, Wandsworth)
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-text">
+          "Professional collaboration throughout. Detailed drawings that our builder could actually work from. Would recommend."
+        </div>
+        <div class="testimonial-author">
+          — Sarah L., Architect (Loft Conversion, Islington)
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-text">
+          "Answered all my questions during installation. Made the build straightforward. Good service."
+        </div>
+        <div class="testimonial-author">
+          — Tom R., Builder (Side Extension, Hackney)
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- Footer -->
@@ -520,14 +935,28 @@
     // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Accordion functionality
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (mobileMenuToggle && mobileNav) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+        const isExpanded = mobileNav.classList.contains('active');
+        mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
+        mobileMenuToggle.textContent = isExpanded ? '✕' : '☰';
+      });
+    }
+
+    // Accordion functionality with special animation for How It Works
     (function() {
       const sections = [
-        {btn: document.querySelector('#small .bubble'), panel: document.getElementById('panel-small')},
-        {btn: document.querySelector('#complex .bubble'), panel: document.getElementById('panel-complex')}
+        {btn: document.querySelector('#how-it-works-section .bubble'), panel: document.getElementById('panel-how-it-works'), isHowItWorks: true},
+        {btn: document.querySelector('#single-section .bubble'), panel: document.getElementById('panel-single')},
+        {btn: document.querySelector('#packages-section .bubble'), panel: document.getElementById('panel-packages')}
       ];
 
-      sections.forEach(({btn, panel}) => {
+      sections.forEach(({btn, panel, isHowItWorks}) => {
         if (!btn || !panel) return;
 
         btn.addEventListener('click', () => {
@@ -543,16 +972,45 @@
           if (!isOpen) {
             panel.classList.add('open');
             btn.setAttribute('aria-expanded', 'true');
+            
+            // Special animation for How It Works
+            if (isHowItWorks) {
+              const steps = panel.querySelectorAll('.process-step');
+              const timeline = panel.querySelector('.process-timeline');
+              
+              // Animate steps
+              steps.forEach((step, index) => {
+                setTimeout(() => {
+                  step.classList.add('animate');
+                }, 50);
+              });
+              
+              // Animate timeline after steps
+              if (timeline) {
+                setTimeout(() => {
+                  timeline.classList.add('animate');
+                }, 50);
+              }
+            }
+            
             // Smooth scroll into view
             setTimeout(() => {
               panel.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }, 50);
+          } else {
+            // Remove animation classes when closing How It Works
+            if (isHowItWorks) {
+              const steps = panel.querySelectorAll('.process-step');
+              const timeline = panel.querySelector('.process-timeline');
+              steps.forEach(step => step.classList.remove('animate'));
+              if (timeline) timeline.classList.remove('animate');
+            }
           }
         });
       });
     })();
 
-    // Image preview switching + CTA reveal
+    // Job selection - expands to show details inline
     (function() {
       const allLists = document.querySelectorAll('.jobs');
       let revealedCTA = false;
@@ -562,18 +1020,26 @@
         const options = list.querySelectorAll('.job');
 
         options.forEach((opt, idx) => {
-          // Don't pre-select any option
           opt.setAttribute('aria-selected', 'false');
 
           opt.addEventListener('click', () => {
-            // Update selection
+            // Toggle selection
+            const wasSelected = opt.getAttribute('aria-selected') === 'true';
+            
+            // Deselect all in this list
             options.forEach(o => o.setAttribute('aria-selected', 'false'));
-            opt.setAttribute('aria-selected', 'true');
+            
+            // Select this one if it wasn't already selected
+            if (!wasSelected) {
+              opt.setAttribute('aria-selected', 'true');
+            }
             
             // Update preview with image
             const src = opt.getAttribute('data-img');
-            if (preview && src) {
-              preview.innerHTML = `<img src="${src}" alt="Selected job preview" />`;
+            if (preview && src && !wasSelected) {
+              preview.innerHTML = `<img src="${src}" alt="Selected service illustration" />`;
+            } else if (wasSelected) {
+              preview.innerHTML = `<div class="preview-placeholder">Click a service to see what's included</div>`;
             }
 
             // Reveal CTA after first interaction
